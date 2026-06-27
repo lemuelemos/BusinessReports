@@ -14,9 +14,9 @@ de sumário.
 \seealso{
 Links úteis:
 \itemize{
-  \item \url{https://lemuelemos.github.io/BusinessReport/}
-  \item \url{https://github.com/lemuelemos/BusinessReport}
-  \item Relate problemas em \url{https://github.com/lemuelemos/BusinessReport/issues}
+  \item \url{https://lemuelemos.github.io/BusinessReports/}
+  \item \url{https://github.com/lemuelemos/BusinessReports}
+  \item Relate problemas em \url{https://github.com/lemuelemos/BusinessReports/issues}
 }
 
 }

@@ -32,9 +32,9 @@ Suggests:
     withr       (>= 2.5.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://lemuelemos.github.io/BusinessReport/,
-    https://github.com/lemuelemos/BusinessReport
-BugReports: https://github.com/lemuelemos/BusinessReport/issues
+URL: https://lemuelemos.github.io/BusinessReports/,
+    https://github.com/lemuelemos/BusinessReports
+BugReports: https://github.com/lemuelemos/BusinessReports/issues
 Language: pt-BR
 Config/roxygen2/version: 7.3.3
 Config/Needs/website: pkgdown

@@ -58,7 +58,7 @@
       // Contact or URL placeholder
       text(size: 8.5pt, fill: white.transparentize(50%))[
         Gerado com o pacote R \
-        #link("https://github.com/lemuelemos/BusinessReport")[BusinessReport]
+        #link("https://github.com/lemuelemos/BusinessReports")[BusinessReport]
       ]
     }
   )

@@ -1,8 +1,8 @@
 # <img src="man/figures/hexsticker.png" alt="Logomarca do BusinessReport" width="120" style="vertical-align: middle; margin-right: 18px;"> BusinessReport
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/lemuelemos/BusinessReport/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lemuelemos/BusinessReport/actions/workflows/R-CMD-check.yaml)
-[![pkgdown](https://github.com/lemuelemos/BusinessReport/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/lemuelemos/BusinessReport/actions/workflows/pkgdown.yaml)
+[![R-CMD-check](https://github.com/lemuelemos/BusinessReports/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lemuelemos/BusinessReports/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/lemuelemos/BusinessReports/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/lemuelemos/BusinessReports/actions/workflows/pkgdown.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Licença: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
@@ -20,7 +20,7 @@ um projeto Quarto completo com:
 ## Instalação
 
 ```r
-pak::pak("lemuelemos/BusinessReport")
+pak::pak("lemuelemos/BusinessReports")
 ```
 
 ## Uso rápido
@@ -119,7 +119,7 @@ meu-relatorio/
 ## Documentação
 
 O site da documentação é gerado com `pkgdown` e publicado em:
-<https://lemuelemos.github.io/BusinessReport/>
+<https://lemuelemos.github.io/BusinessReports/>
 
 ## Licença
 

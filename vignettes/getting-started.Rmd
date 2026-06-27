@@ -27,7 +27,7 @@ knitr::include_graphics("../man/figures/hexsticker.png")
 ## Instalação
 
 ```{r install}
-pak::pak("lemuelemos/BusinessReport")
+pak::pak("lemuelemos/BusinessReports")
 ```
 
 ## Criando o primeiro projeto

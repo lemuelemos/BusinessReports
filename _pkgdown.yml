@@ -1,4 +1,4 @@
-url: https://lemuelemos.github.io/BusinessReport/
+url: https://lemuelemos.github.io/BusinessReports/
 lang: pt
 
 template:
@@ -31,7 +31,7 @@ navbar:
       href: news/index.html
     github:
       icon: fab fa-github
-      href: https://github.com/lemuelemos/BusinessReport
+      href: https://github.com/lemuelemos/BusinessReports
       aria-label: Repositório no GitHub
 
 home:
@@ -39,9 +39,9 @@ home:
   description: Modelos profissionais Quarto/Typst para relatórios corporativos e analíticos.
   links:
     - text: Código no GitHub
-      href: https://github.com/lemuelemos/BusinessReport
+      href: https://github.com/lemuelemos/BusinessReports
     - text: Reportar problema
-      href: https://github.com/lemuelemos/BusinessReport/issues
+      href: https://github.com/lemuelemos/BusinessReports/issues
 
 reference:
   - title: Criação de relatórios
