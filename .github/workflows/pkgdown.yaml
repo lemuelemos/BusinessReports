@@ -6,7 +6,7 @@ on:
 name: pkgdown
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   pkgdown:
@@ -15,8 +15,13 @@ jobs:
       group: pkgdown
       cancel-in-progress: true
 
+    permissions:
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
 
       - uses: r-lib/actions/setup-pandoc@v2
 

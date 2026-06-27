@@ -12,16 +12,16 @@ contracapa opcionais, uma coleção curada de fontes e três estilos distintos
 de sumário.
 }
 \seealso{
-Links úteis:
+Useful links:
 \itemize{
   \item \url{https://lemuelemos.github.io/BusinessReports/}
   \item \url{https://github.com/lemuelemos/BusinessReports}
-  \item Relate problemas em \url{https://github.com/lemuelemos/BusinessReports/issues}
+  \item Report bugs at \url{https://github.com/lemuelemos/BusinessReports/issues}
 }
 
 }
 \author{
-\strong{Mantenedor}: Lemuel Lemos
+\strong{Maintainer}: Lemuel Lemos \email{lemuelemos@gmail.com}
 
 }
 \keyword{internal}
