@@ -1,5 +1,12 @@
 ^renv$
 ^renv\.lock$
-^BusinessReports\.Rproj$
+^\.git$
+^\.gitignore$
 ^\.Rproj\.user$
+^.*\.Rproj$
+^README\.Rmd$
+^README\.md$
 ^LICENSE\.md$
+^cran-comments\.md$
+^codecov\.yml$
+^\.github$

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <!-- Placeholder logo: replace with your own logo file -->
+  <rect x="0" y="0" width="60" height="60" rx="4" fill="rgba(255,255,255,0.15)"/>
+  <text x="30" y="40" font-family="Georgia, serif" font-size="28"
+        font-weight="bold" fill="white" text-anchor="middle">F</text>
+  <text x="72" y="28" font-family="Georgia, serif" font-size="13"
+        font-weight="bold" fill="white">FUNDREPORT</text>
+  <text x="72" y="46" font-family="Georgia, serif" font-size="9"
+        fill="rgba(255,255,255,0.65)">Substitua por seu logo</text>
+</svg>

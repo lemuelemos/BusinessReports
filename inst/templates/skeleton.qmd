@@ -1,0 +1,69 @@
+---
+title: "<<TITLE>>"
+subtitle: "<<SUBTITLE>>"
+author:
+  - name: "<<AUTHOR>>"
+    affiliation: "<<INSTITUTION>>"
+date: "<<DATE>>"
+lang: <<LANG>>
+
+format:
+  business-report-typst: default
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: false
+---
+
+# Introdução
+
+Descreva aqui o contexto e a motivação do estudo.
+Substitua este conteúdo pelo texto do seu relatório.
+
+## Escopo
+
+Delimite o escopo da análise: período, universo de observações, e definições
+operacionais relevantes.
+
+## Estrutura do Documento
+
+O relatório está organizado em @sec-metodologia (metodologia),
+@sec-resultados (resultados), e @sec-conclusao (conclusão e considerações finais).
+
+# Metodologia {#sec-metodologia}
+
+## Dados
+
+Descreva as fontes de dados, o período de cobertura, e eventuais critérios de
+exclusão ou tratamento de missing values.
+
+## Modelo
+
+Apresente a especificação do modelo ou do framework analítico adotado.
+
+# Resultados {#sec-resultados}
+
+## Estatísticas Descritivas
+
+```{r}
+#| label: tbl-descritivas
+#| tbl-cap: "Estatísticas descritivas da amostra"
+
+# Substitua pelo seu código R
+summary(mtcars[, 1:5]) |> knitr::kable()
+```
+
+## Análise Principal
+
+Apresente os resultados centrais da análise.
+
+# Conclusão {#sec-conclusao}
+
+Sintetize as principais conclusões e suas implicações.
+
+# Referências {.unnumbered}
+
+::: {#refs}
+:::

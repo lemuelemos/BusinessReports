@@ -1,7 +1,25 @@
+# R build artefacts
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-.httr-oauth
+*.Rproj
+
+# Package build
+*.tar.gz
+*.zip
+/doc/
+/Meta/
+/inst/doc/
+
+# Tests
+/tests/testthat/_snaps/
+
+# Vignette intermediaries
+vignettes/*.html
+vignettes/*.pdf
+vignettes/*_files/
+
+# Misc
 .DS_Store
-.quarto
+Thumbs.db
