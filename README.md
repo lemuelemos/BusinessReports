@@ -1,20 +1,21 @@
-# BusinessReport <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# <img src="man/figures/hexsticker.png" alt="Logomarca do BusinessReport" width="120" style="vertical-align: middle; margin-right: 18px;"> BusinessReport
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/lemuelemos/BusinessReport/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lemuelemos/BusinessReport/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/lemuelemos/BusinessReport/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/lemuelemos/BusinessReport/actions/workflows/pkgdown.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Licença: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
-`BusinessReport` é um pacote R que fornece templates profissionais **Quarto/Typst**
+`BusinessReport` é um pacote R que fornece modelos profissionais **Quarto/Typst**
 para relatórios corporativos e analíticos. Com uma chamada de função, você obtém
 um projeto Quarto completo com:
 
 - Capa e contracapa opcionais
-- Três estilos distintos de sumário (Clássico, Moderno, Minimalista)
-- Uma coleção de 14 fontes de publicações financeiras e projetos tipográficos renomados
-- Layout profissional A4 com cabeçalho, rodapé, e hierarquia tipográfica completa
-- Cor de destaque única que propaga para todos os elementos visuais
+- Três estilos distintos de sumário
+- Fontes serifadas e sem serifa curadas para relatórios
+- Layout profissional A4 com hierarquia tipográfica consistente
+- Cor de destaque única aplicada a todo o modelo
 
 ## Instalação
 
@@ -27,21 +28,19 @@ pak::pak("lemuelemos/BusinessReport")
 ```r
 library(BusinessReport)
 
-# Criar um projeto novo
 create_business_report(
-  path        = "my-report-2025",
-  title       = "Relatório Anual: 2025",
-  subtitle    = "Análise de Adequação de Capital",
-  author      = "Gerência de Modelagem e Monitoramento",
+  path = "my-report-2025",
+  title = "Relatório Anual: 2025",
+  subtitle = "Análise de Adequação de Capital",
+  author = "Gerência de Modelagem e Monitoramento",
   institution = "FGCoop",
-  font        = "ibm-plex",      # IBM Plex Sans
+  font = "georgia",
   primary_color = "#0d3d6e",
-  toc_style   = 2,               # Sumário Moderno
-  cover       = TRUE,
-  back_cover  = TRUE
+  toc_style = 2L,
+  cover = TRUE,
+  back_cover = TRUE
 )
 
-# Renderizar
 quarto::quarto_render("my-report-2025/report.qmd")
 ```
 
@@ -51,22 +50,22 @@ quarto::quarto_render("my-report-2025/report.qmd")
 list_fonts()
 ```
 
-| id | Display Name | Estilo | Uso famoso |
-|----|--------------|--------|-----------|
-| `georgia` | Georgia | Serif | The Economist |
-| `palatino` | Palatino Linotype | Serif | LaTeX padrão |
-| `garamond` | EB Garamond | Serif | Penguin Books |
-| `baskerville` | Libre Baskerville | Serif | Google Books |
-| `merriweather` | Merriweather | Serif | Medium.com |
-| `crimson` | Crimson Pro | Serif | Periódicos acadêmicos |
-| `spectral` | Spectral | Serif | Google Fonts |
-| `lato` | Lato | Sans | Relatórios da ONU |
-| `source-sans` | Source Sans 3 | Sans | Adobe |
-| `fira-sans` | Fira Sans | Sans | Mozilla |
-| `ibm-plex` | IBM Plex Sans | Sans | IBM annual reports |
-| `montserrat` | Montserrat | Sans | Pitch decks modernos |
-| `roboto` | Roboto | Sans | Google |
-| `inter` | Inter | Sans | Linear, Vercel |
+| id | Fonte | Estilo | Observação |
+|----|-------|--------|------------|
+| `georgia` | Georgia | Serifada | Fonte de sistema |
+| `palatino` | Palatino Linotype | Serifada | Fonte de sistema |
+| `garamond` | EB Garamond | Serifada | Requer instalação |
+| `baskerville` | Libre Baskerville | Serifada | Requer instalação |
+| `merriweather` | Merriweather | Serifada | Requer instalação |
+| `crimson` | Crimson Pro | Serifada | Requer instalação |
+| `spectral` | Spectral | Serifada | Requer instalação |
+| `lato` | Lato | Sem serifa | Requer instalação |
+| `source-sans` | Source Sans 3 | Sem serifa | Requer instalação |
+| `fira-sans` | Fira Sans | Sem serifa | Requer instalação |
+| `ibm-plex` | IBM Plex Sans | Sem serifa | Requer instalação |
+| `montserrat` | Montserrat | Sem serifa | Requer instalação |
+| `roboto` | Roboto | Sem serifa | Requer instalação |
+| `inter` | Inter | Sem serifa | Requer instalação |
 
 ## Estilos de sumário
 
@@ -74,32 +73,32 @@ list_fonts()
 list_toc_styles()
 ```
 
-| ID | Nome | Características |
-|----|------|----------------|
-| 1 | Clássico | Dot leaders, capítulos em negrito e cor primária |
-| 2 | Moderno | Barra lateral colorida, número em badge |
-| 3 | Minimalista | Sem decoração, hierarquia por tipografia |
+| ID | Nome | Descrição |
+|----|------|-----------|
+| 1 | Clássico | Dot leaders e capítulos em destaque |
+| 2 | Moderno | Barra lateral colorida e badge de página |
+| 3 | Minimalista | Hierarquia limpa com poucos ornamentos |
 
-## Personalização pós-criação
+## Personalização
 
 ```r
-set_font("my-report-2025",          font  = "merriweather")
-set_toc_style("my-report-2025",     style = 3)
+set_font("my-report-2025", font = "merriweather")
+set_toc_style("my-report-2025", style = 3L)
 set_primary_color("my-report-2025", color = "#8b1a1a")
-toggle_cover("my-report-2025",      cover = FALSE)
+toggle_cover("my-report-2025", cover = FALSE)
 toggle_back_cover("my-report-2025", back_cover = FALSE)
 ```
 
 ## Estrutura gerada
 
-```
+```text
 meu-relatorio/
 ├── report.qmd
 ├── assets/
-│   └── logo.svg                     ← substitua pelo seu logo
+│   └── logo.svg
 └── _extensions/
     └── business-report/
-        ├── _business-report-config.typ  ← gerado pelo R; editável
+        ├── _business-report-config.typ
         ├── _extension.yml
         ├── typst-template.typ
         ├── typst-show.typ
@@ -113,10 +112,14 @@ meu-relatorio/
 
 ## Pré-requisitos
 
-- R ≥ 4.2
-- Quarto ≥ 1.4 com suporte a Typst
-- Fontes OFL devem ser instaladas separadamente
-  ([Google Fonts](https://fonts.google.com))
+- R >= 4.2
+- Quarto >= 1.4 com suporte a Typst
+- Fontes de código aberto instaladas no sistema quando necessário
+
+## Documentação
+
+O site da documentação é gerado com `pkgdown` e publicado em:
+<https://lemuelemos.github.io/BusinessReport/>
 
 ## Licença
 

@@ -1,26 +1,22 @@
 Package: BusinessReport
 Type: Package
-Title: Professional Business Report Templates for Quarto/Typst
+Title: Modelos Profissionais de Relatórios para Quarto/Typst
 Version: 0.1.0
 Authors@R: c(
     person(
-      given  = "First",
-      family = "Last",
-      email  = "your@email.com",
-      role   = c("aut", "cre"),
-      comment = c(ORCID = "0000-0000-0000-0000")
+      given  = "Lemuel",
+      family = "Lemos",
+      role   = c("aut", "cre")
     )
   )
-Description: Provides professional Quarto report templates rendered via Typst
-    for business, analytical, and technical reporting. Features include optional
-    cover and back cover pages, a curated collection of fonts from renowned
-    publications and open-source typeface projects, and three distinct table of
-    contents styles (classic, modern, and minimal). Reports are created as
-    self-contained Quarto projects that users can version-control and extend.
+Description: Fornece templates profissionais de relatórios em Quarto com
+    renderização via Typst para usos corporativos, analíticos e técnicos.
+    Inclui capa e contracapa opcionais, uma coleção curada de fontes e três
+    estilos distintos de sumário. Os relatórios são criados como projetos
+    Quarto autocontidos, fáceis de versionar e estender.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Imports:
     cli      (>= 3.6.0),
     fs       (>= 1.6.0),
@@ -28,6 +24,7 @@ Imports:
     rlang    (>= 1.1.0),
     yaml     (>= 2.3.0)
 Suggests:
+    pkgdown     (>= 2.1.0),
     quarto      (>= 1.4),
     testthat    (>= 3.0.0),
     knitr       (>= 1.45),
@@ -35,6 +32,10 @@ Suggests:
     withr       (>= 2.5.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://github.com/lemuelemos/BusinessReport
+URL: https://lemuelemos.github.io/BusinessReport/,
+    https://github.com/lemuelemos/BusinessReport
 BugReports: https://github.com/lemuelemos/BusinessReport/issues
-Language: en-US
+Language: pt-BR
+Config/roxygen2/version: 7.3.3
+Config/Needs/website: pkgdown
+RoxygenNote: 7.3.3

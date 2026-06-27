@@ -1,73 +1,61 @@
 # R/create_report.R
 
-#' Create a new `BusinessReport` Quarto project
+#' Crie um novo projeto Quarto do `BusinessReport`
 #'
 #' @description
-#' Scaffolds a ready-to-render Quarto/Typst project for business reporting.
-#' The function:
+#' Gera um projeto Quarto/Typst pronto para renderização. A função:
 #' \enumerate{
-#'   \item Creates the project directory (with an error if it already exists,
-#'     unless `overwrite = TRUE`).
-#'   \item Copies the Quarto extension (`_extensions/business-report/`) into the
-#'     project.
-#'   \item Generates `_extensions/business-report/_business-report-config.typ` with the
-#'     chosen options.
-#'   \item Copies an `assets/` folder containing placeholder logo and back-cover
-#'     images that you should replace with your own.
-#'   \item Writes the `report.qmd` skeleton pre-filled with title and metadata.
+#'   \item cria o diretório do projeto;
+#'   \item copia a extensão Quarto (`_extensions/business-report/`);
+#'   \item gera `_extensions/business-report/_business-report-config.typ`;
+#'   \item copia a pasta `assets/` com arquivos de imagem iniciais;
+#'   \item escreve o esqueleto de `report.qmd` com título e metadados.
 #' }
 #'
-#' After creation, open `report.qmd` and render with
-#' `quarto::quarto_render("report.qmd")` or the RStudio Render button.
+#' Após a criação, abra `report.qmd` e renderize com
+#' `quarto::quarto_render("report.qmd")` ou pelo botão Render do RStudio.
 #'
-#' @param path  Path to the new project directory. Must not exist unless
-#'   `overwrite = TRUE`.
-#' @param title  Report title (character string).
-#' @param subtitle  Optional subtitle (character string or `NULL`).
-#' @param author  Author name (character string or `NULL`).
-#' @param institution  Institution or organisation name (character string or `NULL`).
-#' @param date  Report date. Defaults to today in `"dd de Month de YYYY"` format
-#'   for Portuguese documents. Pass any string to override.
-#' @param font  Font id. Use [list_fonts()] to see options. Defaults to
-#'   `"georgia"`.
-#' @param primary_color  Hex accent colour with leading `#`. Default `"#1a3a5c"`.
-#' @param toc_style  TOC style: `1` (Clássico), `2` (Moderno), or
-#'   `3` (Minimalista). Use [list_toc_styles()] for descriptions.
-#' @param cover  Logical. Whether to include a cover page. Default `TRUE`.
-#' @param back_cover  Logical. Whether to include a back cover page. Default `TRUE`.
-#' @param lang  BCP 47 language tag. Default `"pt"` (Portuguese). Pass `"en"`
-#'   for English date formatting in the template.
-#' @param overwrite  Logical. If `TRUE`, an existing directory at `path` is
-#'   overwritten. Use with care.
-#' @param open  Logical. Whether to open `report.qmd` in the IDE after creation.
-#'   Defaults to `TRUE` in interactive sessions.
+#' @param path Caminho para o novo diretório do projeto. Não deve existir, a
+#'   menos que `overwrite = TRUE`.
+#' @param title Título do relatório.
+#' @param subtitle Subtítulo opcional.
+#' @param author Nome do autor.
+#' @param institution Nome da instituição ou organização.
+#' @param date Data do relatório. O padrão é a data de hoje.
+#' @param font Identificador da fonte. Use [list_fonts()] para ver as opções.
+#' @param primary_color Cor hexadecimal de destaque com `#`.
+#' @param toc_style Estilo do sumário: `1` (Clássico), `2` (Moderno) ou
+#'   `3` (Minimalista).
+#' @param cover Lógico. Se `TRUE`, inclui capa.
+#' @param back_cover Lógico. Se `TRUE`, inclui contracapa.
+#' @param lang Tag BCP 47 de idioma. O padrão é `"pt"`.
+#' @param overwrite Lógico. Se `TRUE`, sobrescreve um diretório existente.
+#' @param open Lógico. Se `TRUE`, abre `report.qmd` na IDE após a criação.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @examples
 #' \dontrun{
-#' # Minimal call — uses all defaults
-#' create_business_report("my-report")
+#' create_business_report("meu-relatorio")
 #'
-#' # Customised call
 #' create_business_report(
-#'   path          = "my-report-2025",
-#'   title         = "Relatório Anual: 2025",
-#'   subtitle      = "Análise de Adequação de Capital",
-#'   author        = "Gerência de Modelagem e Monitoramento",
-#'   institution   = "FGCoop",
-#'   font          = "ibm-plex",
+#'   path = "relatorio-2025",
+#'   title = "Relatório Anual: 2025",
+#'   subtitle = "Análise de Adequação de Capital",
+#'   author = "Gerência de Modelagem e Monitoramento",
+#'   institution = "FGCoop",
+#'   font = "ibm-plex",
 #'   primary_color = "#0d3d6e",
-#'   toc_style     = 2,
-#'   cover         = TRUE,
-#'   back_cover    = TRUE
+#'   toc_style = 2L,
+#'   cover = TRUE,
+#'   back_cover = TRUE
 #' )
 #' }
 #'
 #' @export
 create_business_report <- function(
   path,
-  title         = "Business Report",
+  title         = "Relatório Empresarial",
   subtitle      = NULL,
   author        = NULL,
   institution   = NULL,
@@ -83,7 +71,6 @@ create_business_report <- function(
 ) {
   rlang::check_required(path)
 
-  # ── Input validation ──────────────────────────────────────────────────────
   typst_family <- .check_font_id(font)
   .check_color(primary_color)
   toc_style <- .check_toc_style(toc_style)
@@ -96,33 +83,28 @@ create_business_report <- function(
   author      <- author      %||% ""
   institution <- institution %||% ""
 
-  # ── Directory ─────────────────────────────────────────────────────────────
   path <- fs::path_abs(path)
 
   if (fs::dir_exists(path) && !overwrite) {
     cli::cli_abort(
       c(
-        "Directory {.path {path}} already exists.",
-        "i" = "Use {.code overwrite = TRUE} to replace it."
+        "O diretório {.path {path}} já existe.",
+        "i" = "Use {.code overwrite = TRUE} para sobrescrevê-lo."
       )
     )
   }
 
   fs::dir_create(path, recurse = TRUE)
 
-  cli::cli_progress_step("Creating project at {.path {path}}")
+  cli::cli_progress_step("Criando projeto em {.path {path}}")
 
-  # ── Copy Quarto extension ─────────────────────────────────────────────────
   ext_dest <- .ext_dest(path)
   fs::dir_create(fs::path(path, "_extensions", "business-report"), recurse = TRUE)
 
-  cli::cli_progress_step("Copying Quarto extension")
-
+  cli::cli_progress_step("Copiando a extensão Quarto")
   fs::dir_copy(.ext_source(), ext_dest, overwrite = TRUE)
 
-  # ── Write config Typst file ───────────────────────────────────────────────
-  cli::cli_progress_step("Writing configuration")
-
+  cli::cli_progress_step("Escrevendo a configuração")
   .write_config(
     path          = path,
     font_family   = typst_family,
@@ -133,14 +115,11 @@ create_business_report <- function(
     lang          = lang
   )
 
-  # ── Copy placeholder assets ───────────────────────────────────────────────
   assets_dest <- fs::path(path, "assets")
   fs::dir_create(assets_dest)
   fs::dir_copy(.assets_source(), assets_dest, overwrite = TRUE)
 
-  # ── Write skeleton .qmd ───────────────────────────────────────────────────
-  cli::cli_progress_step("Writing report skeleton")
-
+  cli::cli_progress_step("Escrevendo o esqueleto do relatório")
   .write_skeleton(
     path        = path,
     title       = title,
@@ -151,18 +130,17 @@ create_business_report <- function(
     lang        = lang
   )
 
-  # ── Done ──────────────────────────────────────────────────────────────────
   cli::cli_inform(c(
     "",
-    "v" = "Project ready: {.path {path}}",
+    "v" = "Projeto pronto: {.path {path}}",
     "",
-    "*" = "Next steps:",
-    " " = "1. Replace {.file assets/logo.svg} with your logo.",
-    " " = "2. Open {.file report.qmd} and start writing.",
-    " " = "3. Render with {.code quarto::quarto_render(\"report.qmd\")}.",
+    "*" = "Próximos passos:",
+    " " = "1. Substitua {.file assets/logo.svg} pelo seu logo.",
+    " " = "2. Abra {.file report.qmd} e comece a escrever.",
+    " " = "3. Renderize com {.code quarto::quarto_render(\"report.qmd\")}.",
     " " = "",
-    "i" = "Use {.fn BusinessReport::set_font}, {.fn set_toc_style}, and",
-    " " = "   {.fn set_primary_color} to adjust the look without re-creating."
+    "i" = "Use {.fn BusinessReport::set_font}, {.fn set_toc_style} e",
+    " " = "   {.fn set_primary_color} para ajustar o visual sem recriar o projeto."
   ))
 
   if (isTRUE(open)) {
@@ -173,17 +151,17 @@ create_business_report <- function(
 }
 
 
-#' Open the main report file of a `BusinessReport` project in the IDE
+#' Abra o arquivo principal de um projeto `BusinessReport` na IDE
 #'
-#' @param path  Project root directory. Defaults to `"."`.
+#' @param path Diretório raiz do projeto. O padrão é `"."`.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @export
 open_report <- function(path = ".") {
   qmd <- fs::path(path, "report.qmd")
   if (!fs::file_exists(qmd)) {
-    cli::cli_warn("No {.file report.qmd} found at {.path {path}}.")
+    cli::cli_warn("Nenhum {.file report.qmd} foi encontrado em {.path {path}}.")
     return(invisible(path))
   }
   if (rlang::is_interactive()) {
@@ -192,17 +170,8 @@ open_report <- function(path = ".") {
   invisible(path)
 }
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Internal helpers
-# ─────────────────────────────────────────────────────────────────────────────
-
-#' Null-coalescing operator
-#' @noRd
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
-
-#' Format a Date for the skeleton YAML
-#' @noRd
 .format_date <- function(date, lang = "pt") {
   if (lang == "pt") {
     months_pt <- c(
@@ -219,15 +188,11 @@ open_report <- function(path = ".") {
   }
 }
 
-
-#' Write the report.qmd skeleton into the project
-#' @noRd
 .write_skeleton <- function(
   path, title, subtitle, author, institution, date, lang
 ) {
-  skeleton_raw <- readLines(.skeleton_path(), warn = FALSE)
+  skeleton_raw <- readLines(.skeleton_path(), warn = FALSE, encoding = "UTF-8")
 
-  # Map placeholders to values; all are strings so no type issues
   replacements <- list(
     "<<TITLE>>"       = title,
     "<<SUBTITLE>>"    = subtitle,
@@ -243,6 +208,6 @@ open_report <- function(path = ".") {
   }
 
   dest <- fs::path(path, "report.qmd")
-  writeLines(result, dest)
+  writeLines(enc2utf8(result), dest, useBytes = TRUE)
   invisible(dest)
 }

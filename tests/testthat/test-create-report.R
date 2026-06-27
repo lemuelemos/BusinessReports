@@ -46,12 +46,39 @@ test_that("create_business_report() scaffolds a project with expected structure"
   })
 })
 
+test_that("bundled Typst extension uses root-based imports and current outline API", {
+  ext_dir <- testthat::test_path("..", "..", "inst", "quarto", "_extensions", "business-report")
+
+  show_text <- paste(readLines(fs::path(ext_dir, "typst-show.typ"), warn = FALSE), collapse = "\n")
+  template_text <- paste(readLines(fs::path(ext_dir, "typst-template.typ"), warn = FALSE), collapse = "\n")
+  modern_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-modern.typ"), warn = FALSE), collapse = "\n")
+  classic_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-classic.typ"), warn = FALSE), collapse = "\n")
+  minimal_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-minimal.typ"), warn = FALSE), collapse = "\n")
+  cover_text <- paste(readLines(fs::path(ext_dir, "cover.typ"), warn = FALSE), collapse = "\n")
+
+  expect_no_match(show_text, '#import', fixed = TRUE)
+  expect_match(show_text, '$if(title)$', fixed = TRUE)
+  expect_match(show_text, '$if(by-author)$', fixed = TRUE)
+
+  expect_match(template_text, '_extensions/business-report/_business-report-config.typ', fixed = TRUE)
+  expect_match(template_text, 'logo-path:    "../../assets/logo.svg"', fixed = TRUE)
+
+  expect_match(cover_text, 'set text(fill: text-on-dark)', fixed = TRUE)
+  expect_no_match(cover_text, 'font: "inherit"', fixed = TRUE)
+
+  for (toc_text in list(modern_toc, classic_toc, minimal_toc)) {
+    expect_match(toc_text, 'it.element.body', fixed = TRUE)
+    expect_match(toc_text, 'it.page()', fixed = TRUE)
+    expect_match(toc_text, 'outline(title: none, depth: 3, indent: auto)', fixed = TRUE)
+  }
+})
+
 test_that("create_business_report() errors if path exists and overwrite = FALSE", {
   withr::with_tempdir({
     fs::dir_create("exists-already")
     expect_error(
       create_business_report("exists-already", open = FALSE),
-      regexp = "already exists"
+      regexp = "já existe"
     )
   })
 })
@@ -63,6 +90,26 @@ test_that("create_business_report() accepts overwrite = TRUE", {
     expect_no_error(
       create_business_report("my-project", overwrite = TRUE, open = FALSE)
     )
+  })
+})
+
+test_that("create_business_report() writes report.qmd in UTF-8", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    create_business_report(
+      "utf8-project",
+      title = "Relatório com Acentuação",
+      author = "Área Técnica",
+      open = FALSE
+    )
+
+    qmd_text <- paste(
+      readLines(fs::path("utf8-project", "report.qmd"), warn = FALSE, encoding = "UTF-8"),
+      collapse = "\n"
+    )
+
+    expect_match(qmd_text, "Relatório com Acentuação", fixed = TRUE)
+    expect_match(qmd_text, "Introdução", fixed = TRUE)
   })
 })
 

@@ -1,9 +1,5 @@
 # R/toc.R
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Internal TOC style registry
-# ─────────────────────────────────────────────────────────────────────────────
-
 .toc_registry <- data.frame(
   id = 1L:3L,
   name = c("Clássico", "Moderno", "Minimalista"),
@@ -11,37 +7,33 @@
     paste0(
       "Estilo tipográfico clássico. ",
       "Entradas de capítulo em negrito com o acento da cor primária. ",
-      "Pontos de preenchimento (dot leaders) conectando título e número de página. ",
-      "Seções recuadas, subcapítulos em peso regular."
+      "Pontos de preenchimento conectando título e número de página. ",
+      "Seções recuadas e subcapítulos em peso regular."
     ),
     paste0(
       "Estilo contemporâneo com barra lateral colorida. ",
       "Capítulos destacados com retângulo de cor primária à esquerda. ",
       "Números de página em caixas coloridas. ",
-      "Amplo espaçamento entre entradas para leitura aerada."
+      "Espaçamento generoso entre entradas."
     ),
     paste0(
-      "Estilo minimalista, máximo espaço em branco. ",
+      "Estilo minimalista, com máximo espaço em branco. ",
       "Sem líderes de pontos nem decorações. ",
-      "Número de página alinhado à direita separado por fio fino. ",
-      "Hierarquia transmitida apenas via tamanho de fonte e recuo."
+      "Número de página alinhado à direita. ",
+      "Hierarquia transmitida por tamanho de fonte e recuo."
     )
   ),
   typst_file = c("toc-classic.typ", "toc-modern.typ", "toc-minimal.typ"),
   stringsAsFactors = FALSE
 )
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Exported functions
-# ─────────────────────────────────────────────────────────────────────────────
-
-#' List the three table of contents styles available in `BusinessReport`
+#' Liste os três estilos de sumário disponíveis em `BusinessReport`
 #'
 #' @description
-#' Returns a data frame describing each TOC style. Pass the `id` value (1, 2,
-#' or 3) to [create_business_report()] or [set_toc_style()].
+#' Retorna um data frame descrevendo cada estilo de sumário. Passe o valor de
+#' `id` (1, 2 ou 3) para [create_business_report()] ou [set_toc_style()].
 #'
-#' @return A data frame with columns `id`, `name`, and `description`.
+#' @return Um data frame com as colunas `id`, `name` e `description`.
 #'
 #' @examples
 #' list_toc_styles()
@@ -52,21 +44,22 @@ list_toc_styles <- function() {
 }
 
 
-#' Change the table of contents style of an existing `BusinessReport` project
+#' Altere o estilo do sumário de um projeto `BusinessReport` existente
 #'
 #' @description
-#' Updates `_extensions/business-report/_business-report-config.typ` in place,
-#' setting `toc-style` to the chosen value. Re-render to see the effect.
+#' Atualiza `_extensions/business-report/_business-report-config.typ` no local,
+#' definindo `toc-style` para o valor escolhido. Re-renderize para ver o efeito.
 #'
-#' @param path   Project root directory. Defaults to the current working directory.
-#' @param style  Integer: `1` (Clássico), `2` (Moderno), or `3` (Minimalista).
-#'   Use [list_toc_styles()] for descriptions.
+#' @param path Diretório raiz do projeto. O padrão é o diretório de trabalho
+#'   atual.
+#' @param style Inteiro: `1` (Clássico), `2` (Moderno) ou `3` (Minimalista).
+#'   Use [list_toc_styles()] para ver as descrições.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @examples
 #' \dontrun{
-#' set_toc_style("my-report", style = 2)
+#' set_toc_style("meu-relatorio", style = 2)
 #' }
 #'
 #' @export
@@ -76,29 +69,31 @@ set_toc_style <- function(path = ".", style) {
   .update_config_key(path, "toc-style", as.character(style))
   toc_name <- .toc_registry[.toc_registry[["id"]] == style, "name"]
   cli::cli_inform(
-    c("v" = "TOC style updated to {.strong {toc_name}} (style {style}).",
-      "i" = "Re-render your {.file .qmd} to see the change.")
+    c("v" = "Estilo do sumário atualizado para {.strong {toc_name}} (estilo {style}).",
+      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudança.")
   )
   invisible(path)
 }
 
 
-#' Change the primary accent colour of an existing `BusinessReport` project
+#' Altere a cor primária de destaque de um projeto `BusinessReport` existente
 #'
 #' @description
-#' Updates `_extensions/business-report/_business-report-config.typ` to use a new
-#' primary colour. The colour is applied to headings, the cover, the TOC, and
-#' decorative elements throughout the report.
+#' Atualiza `_extensions/business-report/_business-report-config.typ` com uma
+#' nova cor primária. A cor é aplicada a títulos, capa, sumário e elementos
+#' decorativos ao longo do relatório.
 #'
-#' @param path   Project root directory. Defaults to the current working directory.
-#' @param color  A six-digit hex colour string with a leading `#`, e.g. `"#2d6a9a"`.
+#' @param path Diretório raiz do projeto. O padrão é o diretório de trabalho
+#'   atual.
+#' @param color Cor hexadecimal de seis dígitos com `#`, por exemplo
+#'   `"#2d6a9a"`.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @examples
 #' \dontrun{
-#' set_primary_color("my-report", color = "#8b1a1a")  # Deep red
-#' set_primary_color("my-report", color = "#1a5c3a")  # Forest green
+#' set_primary_color("meu-relatorio", color = "#8b1a1a")
+#' set_primary_color("meu-relatorio", color = "#1a5c3a")
 #' }
 #'
 #' @export
@@ -107,23 +102,23 @@ set_primary_color <- function(path = ".", color) {
   .check_color(color)
   .update_config_key(path, "primary-color", glue::glue('rgb("{color}")'))
   cli::cli_inform(
-    c("v" = "Primary colour updated to {.val {color}}.",
-      "i" = "Re-render your {.file .qmd} to see the change.")
+    c("v" = "Cor primária atualizada para {.val {color}}.",
+      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudança.")
   )
   invisible(path)
 }
 
 
-#' Toggle the cover page of an existing `BusinessReport` project
+#' Ative ou desative a capa de um projeto `BusinessReport` existente
 #'
-#' @param path   Project root directory.
-#' @param cover  Logical. `TRUE` to include the cover; `FALSE` to omit it.
+#' @param path Diretório raiz do projeto.
+#' @param cover Lógico. `TRUE` para incluir a capa; `FALSE` para removê-la.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @examples
 #' \dontrun{
-#' toggle_cover("my-report", cover = FALSE)
+#' toggle_cover("meu-relatorio", cover = FALSE)
 #' }
 #'
 #' @export
@@ -131,22 +126,23 @@ toggle_cover <- function(path = ".", cover) {
   rlang::check_required(cover)
   bool_val <- if (isTRUE(cover)) "true" else "false"
   .update_config_key(path, "cover", bool_val)
-  label <- if (isTRUE(cover)) "enabled" else "disabled"
-  cli::cli_inform(c("v" = "Cover page {label}."))
+  label <- if (isTRUE(cover)) "ativada" else "desativada"
+  cli::cli_inform(c("v" = "Capa {label}."))
   invisible(path)
 }
 
 
-#' Toggle the back cover of an existing `BusinessReport` project
+#' Ative ou desative a contracapa de um projeto `BusinessReport` existente
 #'
-#' @param path       Project root directory.
-#' @param back_cover Logical. `TRUE` to include the back cover; `FALSE` to omit it.
+#' @param path Diretório raiz do projeto.
+#' @param back_cover Lógico. `TRUE` para incluir a contracapa; `FALSE` para
+#'   removê-la.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @examples
 #' \dontrun{
-#' toggle_back_cover("my-report", back_cover = FALSE)
+#' toggle_back_cover("meu-relatorio", back_cover = FALSE)
 #' }
 #'
 #' @export
@@ -154,7 +150,7 @@ toggle_back_cover <- function(path = ".", back_cover) {
   rlang::check_required(back_cover)
   bool_val <- if (isTRUE(back_cover)) "true" else "false"
   .update_config_key(path, "back-cover", bool_val)
-  label <- if (isTRUE(back_cover)) "enabled" else "disabled"
-  cli::cli_inform(c("v" = "Back cover {label}."))
+  label <- if (isTRUE(back_cover)) "ativada" else "desativada"
+  cli::cli_inform(c("v" = "Contracapa {label}."))
   invisible(path)
 }

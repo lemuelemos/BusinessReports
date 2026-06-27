@@ -9,6 +9,7 @@
 *.tar.gz
 *.zip
 /doc/
+/docs/
 /Meta/
 /inst/doc/
 
@@ -23,3 +24,4 @@ vignettes/*_files/
 # Misc
 .DS_Store
 Thumbs.db
+renv/staging/

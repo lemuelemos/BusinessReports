@@ -1,0 +1,67 @@
+url: https://lemuelemos.github.io/BusinessReport/
+lang: pt
+
+template:
+  bootstrap: 5
+  bslib:
+    bootswatch: flatly
+  light-switch: true
+
+development:
+  mode: auto
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    intro:
+      text: Início
+      href: index.html
+    reference:
+      text: Referência
+      href: reference/index.html
+    articles:
+      text: Artigos
+      menu:
+        - text: Introdução
+          href: articles/getting-started.html
+    news:
+      text: Novidades
+      href: news/index.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/lemuelemos/BusinessReport
+      aria-label: Repositório no GitHub
+
+home:
+  title: BusinessReport
+  description: Modelos profissionais Quarto/Typst para relatórios corporativos e analíticos.
+  links:
+    - text: Código no GitHub
+      href: https://github.com/lemuelemos/BusinessReport
+    - text: Reportar problema
+      href: https://github.com/lemuelemos/BusinessReport/issues
+
+reference:
+  - title: Criação de relatórios
+    contents:
+      - create_business_report
+      - open_report
+  - title: Fontes
+    contents:
+      - list_fonts
+      - set_font
+  - title: Sumário e estilo visual
+    contents:
+      - list_toc_styles
+      - set_toc_style
+      - set_primary_color
+      - toggle_cover
+      - toggle_back_cover
+
+articles:
+  - title: Começando
+    navbar: Introdução
+    contents:
+      - getting-started

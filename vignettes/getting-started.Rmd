@@ -10,24 +10,24 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment  = "#>",
-  eval     = FALSE
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
-O pacote `BusinessReport` fornece um template Quarto/Typst profissional para
-relatórios corporativos e analíticos. Com uma única chamada de função você tem
-um projeto Quarto completo, com capa, contracapa, sumário estilizado, e
-tipografia cuidadosamente escolhida.
+O pacote `BusinessReport` fornece um modelo Quarto/Typst profissional para
+relatórios corporativos e analíticos. Com uma única chamada de função você cria
+um projeto Quarto completo, com capa, contracapa, sumário estilizado e
+tipografia configurável.
+
+```{r hexsticker, echo = FALSE, out.width = "220px", fig.align = "center"}
+knitr::include_graphics("../man/figures/hexsticker.png")
+```
 
 ## Instalação
 
 ```{r install}
-# Via pak (recomendado)
 pak::pak("lemuelemos/BusinessReport")
-
-# Via remotes
-remotes::install_github("lemuelemos/BusinessReport")
 ```
 
 ## Criando o primeiro projeto
@@ -36,26 +36,26 @@ remotes::install_github("lemuelemos/BusinessReport")
 library(BusinessReport)
 
 create_business_report(
-  path        = "meu-relatorio",
-  title       = "Relatório Anual: 2025",
-  subtitle    = "Análise de Adequação de Capital",
-  author      = "Gerência de Modelagem e Monitoramento",
+  path = "meu-relatorio",
+  title = "Relatório Anual: 2025",
+  subtitle = "Análise de Adequação de Capital",
+  author = "Gerência de Modelagem e Monitoramento",
   institution = "FGCoop",
-  font        = "ibm-plex",
-  toc_style   = 2
+  font = "georgia",
+  toc_style = 2L
 )
 ```
 
 Isso cria a seguinte estrutura:
 
-```
+```text
 meu-relatorio/
-├── report.qmd                     ← Edite aqui
+├── report.qmd
 ├── assets/
-│   └── logo.svg                   ← Substitua pelo seu logo
+│   └── logo.svg
 └── _extensions/
     └── business-report/
-        ├── _business-report-config.typ  ← Configuração gerada pelo R
+        ├── _business-report-config.typ
         ├── _extension.yml
         ├── typst-template.typ
         ├── typst-show.typ
@@ -75,8 +75,8 @@ quarto::quarto_render("meu-relatorio/report.qmd")
 
 ## Escolhendo a fonte
 
-O pacote inclui 14 fontes de publicações financeiras renomadas e projetos
-tipográficos open-source:
+O pacote inclui 14 opções de fontes. As mais seguras para uso imediato no
+Windows são `georgia` e `palatino`, porque já costumam estar instaladas.
 
 ```{r fonts}
 list_fonts()
@@ -85,17 +85,8 @@ list_fonts()
 Para trocar a fonte de um projeto existente:
 
 ```{r set-font}
-set_font("meu-relatorio", font = "merriweather")
-set_font("meu-relatorio", font = "fira-sans")
+set_font("meu-relatorio", font = "palatino")
 ```
-
-### Fontes de sistema vs. fontes OFL
-
-Fontes com `license = "System"` (Georgia, Palatino) já estão disponíveis na
-maioria dos sistemas operacionais. Fontes com `license = "OFL"` precisam ser
-instaladas separadamente; o Typst busca fontes automaticamente nas pastas de
-sistema. O Google Fonts (<https://fonts.google.com>) é a fonte mais conveniente
-para baixar fontes OFL.
 
 ## Estilos de sumário
 
@@ -105,32 +96,19 @@ Há três estilos disponíveis:
 list_toc_styles()
 ```
 
-| ID | Nome | Descrição resumida |
-|----|------|-------------------|
-| 1 | Clássico | Dot leaders, entradas de capítulo em negrito |
-| 2 | Moderno | Barras coloridas laterais, página em badge |
-| 3 | Minimalista | Sem decoração, hierarquia por tamanho e recuo |
-
 Para mudar o estilo:
 
 ```{r set-toc}
-set_toc_style("meu-relatorio", style = 3)
+set_toc_style("meu-relatorio", style = 3L)
 ```
 
 ## Cor de destaque
 
-Toda a identidade visual — capa, títulos, sumário, elementos decorativos —
-deriva de uma única cor primária definida em hexadecimal:
+Toda a identidade visual do relatório deriva de uma cor primária em hexadecimal:
 
 ```{r color}
-# Azul institucional padrão
 set_primary_color("meu-relatorio", color = "#1a3a5c")
-
-# Verde para um relatório ambiental
-set_primary_color("meu-relatorio", color = "#1a5c3a")
-
-# Vermelho para risco
-set_primary_color("meu-relatorio", color = "#8b1a1a")
+set_primary_color("meu-relatorio", color = "#0d3d6e")
 ```
 
 ## Capa e contracapa
@@ -138,23 +116,15 @@ set_primary_color("meu-relatorio", color = "#8b1a1a")
 As páginas de capa e contracapa são opcionais:
 
 ```{r cover}
-# Desativar a contracapa
-toggle_back_cover("meu-relatorio", back_cover = FALSE)
-
-# Reativar a capa
 toggle_cover("meu-relatorio", cover = TRUE)
+toggle_back_cover("meu-relatorio", back_cover = FALSE)
 ```
 
 Para usar o logo da sua instituição, substitua `assets/logo.svg` pelo arquivo
-correto (SVG ou PNG). O caminho é configurado em `cover.typ` e pode ser editado
-diretamente.
+certo.
 
 ## Editando o conteúdo
 
 Abra `report.qmd` e escreva seu relatório em Markdown padrão do Quarto. O
-template já inclui uma estrutura sugerida com seções de Introdução, Metodologia,
-Resultados, e Conclusão.
-
-Recursos Quarto disponíveis normalmente — cross-references (`@sec-`, `@fig-`,
-`@tbl-`), bibliografias, figuras, tabelas e blocos de código R — funcionam
-integralmente com o template.
+modelo já inclui uma estrutura sugerida com Introdução, Metodologia,
+Resultados e Conclusão.

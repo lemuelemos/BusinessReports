@@ -26,11 +26,11 @@ test_that(".check_font_id() returns typst_family for valid id", {
 test_that(".check_font_id() errors on invalid id", {
   expect_error(
     BusinessReport:::.check_font_id("nonexistent-font"),
-    regexp = "not a recognised font"
+    regexp = "recognised font id|fonte"
   )
 })
 
-test_that("style column contains only Serif and Sans-Serif", {
+test_that("style column contains only translated style labels", {
   fonts <- list_fonts()
-  expect_true(all(fonts$style %in% c("Serif", "Sans-Serif")))
+  expect_true(all(fonts$style %in% c("Serifada", "Sem serifa")))
 })

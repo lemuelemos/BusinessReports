@@ -1,15 +1,5 @@
 # R/fonts.R
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Internal font registry
-# ─────────────────────────────────────────────────────────────────────────────
-# Each row maps a user-facing `id` to the exact `typst_family` name that Typst
-# expects, plus descriptive metadata.
-#
-# System fonts (Georgia, Palatino) are pre-installed on most operating systems.
-# OFL fonts (Google Fonts, IBM) must be installed by the user; Typst will search
-# system font directories automatically on macOS, Windows and Linux.
-
 .font_registry <- data.frame(
   id = c(
     "georgia", "palatino", "garamond",
@@ -30,10 +20,10 @@
     "IBM Plex Sans", "Montserrat", "Roboto", "Inter"
   ),
   style = c(
-    "Serif", "Serif", "Serif",
-    "Serif", "Serif", "Serif", "Serif",
-    "Sans-Serif", "Sans-Serif", "Sans-Serif",
-    "Sans-Serif", "Sans-Serif", "Sans-Serif", "Sans-Serif"
+    "Serifada", "Serifada", "Serifada",
+    "Serifada", "Serifada", "Serifada", "Serifada",
+    "Sem serifa", "Sem serifa", "Sem serifa",
+    "Sem serifa", "Sem serifa", "Sem serifa", "Sem serifa"
   ),
   origin = c(
     "Microsoft/Monotype", "Hermann Zapf / Linotype", "Claude Garamond (revival)",
@@ -42,7 +32,7 @@
     "IBM", "Julieta Ulanovsky", "Google", "Rasmus Andersson"
   ),
   license = c(
-    "System", "System", "OFL",
+    "Sistema", "Sistema", "OFL",
     "OFL", "OFL", "OFL", "OFL",
     "OFL", "OFL", "OFL",
     "OFL", "OFL", "Apache 2.0", "OFL"
@@ -66,30 +56,27 @@
   stringsAsFactors = FALSE
 )
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Exported functions
-# ─────────────────────────────────────────────────────────────────────────────
-
-#' List all fonts available in `BusinessReport`
+#' Liste todas as fontes disponíveis em `BusinessReport`
 #'
 #' @description
-#' Returns a data frame with metadata for every font bundled with `BusinessReport`.
-#' The `id` column is what you pass to [create_business_report()] and [set_font()].
+#' Retorna um data frame com metadados para cada fonte disponível em
+#' `BusinessReport`. A coluna `id` é o valor usado em
+#' [create_business_report()] e [set_font()].
 #'
-#' Fonts with `license = "System"` are pre-installed on most operating systems.
-#' Fonts with `license = "OFL"` or `"Apache 2.0"` are open-source and must be
-#' installed separately; Typst searches system font directories automatically.
-#' Google Fonts can be downloaded at <https://fonts.google.com>.
+#' Fontes com `license = "Sistema"` costumam vir instaladas no sistema.
+#' Fontes com `license = "OFL"` ou `"Apache 2.0"` precisam ser instaladas
+#' separadamente. O Typst procura automaticamente nas pastas de fontes do
+#' sistema. O Google Fonts pode ser usado para baixar essas fontes.
 #'
-#' @return A data frame with columns `id`, `display_name`, `typst_family`,
-#'   `style`, `origin`, `license`, and `famous_use`.
+#' @return Um data frame com as colunas `id`, `display_name`, `typst_family`,
+#'   `style`, `origin`, `license` e `famous_use`.
 #'
 #' @examples
 #' list_fonts()
 #'
-#' # Filter to sans-serif options only
+#' # Filtrar apenas as opções sem serifa
 #' fonts <- list_fonts()
-#' fonts[fonts$style == "Sans-Serif", c("id", "display_name", "famous_use")]
+#' fonts[fonts$style == "Sem serifa", c("id", "display_name", "famous_use")]
 #'
 #' @export
 list_fonts <- function() {
@@ -97,23 +84,24 @@ list_fonts <- function() {
 }
 
 
-#' Change the font of an existing `BusinessReport` project
+#' Altere a fonte de um projeto `BusinessReport` existente
 #'
 #' @description
-#' Updates `_extensions/business-report/_business-report-config.typ` in place,
-#' changing the `font-family` value. Re-render the Quarto document to see
-#' the effect.
+#' Atualiza `_extensions/business-report/_business-report-config.typ` no local,
+#' modificando o valor de `font-family`. Re-renderize o documento Quarto para
+#' ver o efeito.
 #'
-#' @param path  Path to the project root (the directory that contains the
-#'   `_extensions/` folder). Defaults to the current working directory.
-#' @param font  Font id string. Use [list_fonts()] to see valid values.
+#' @param path Caminho para a raiz do projeto. O padrão é o diretório de
+#'   trabalho atual.
+#' @param font Identificador da fonte. Use [list_fonts()] para ver os valores
+#'   válidos.
 #'
-#' @return `path`, invisibly.
+#' @return `path`, invisivelmente.
 #'
 #' @examples
 #' \dontrun{
-#' set_font("my-report", font = "ibm-plex")
-#' set_font("my-report", font = "merriweather")
+#' set_font("meu-relatorio", font = "ibm-plex")
+#' set_font("meu-relatorio", font = "merriweather")
 #' }
 #'
 #' @export
@@ -122,8 +110,8 @@ set_font <- function(path = ".", font) {
   typst_family <- .check_font_id(font)
   .update_config_key(path, "font-family", glue::glue('"{typst_family}"'))
   cli::cli_inform(
-    c("v" = "Font updated to {.strong {typst_family}}.",
-      "i" = "Re-render your {.file .qmd} to see the change.")
+    c("v" = "Fonte atualizada para {.strong {typst_family}}.",
+      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudança.")
   )
   invisible(path)
 }

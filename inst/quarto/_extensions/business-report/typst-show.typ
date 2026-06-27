@@ -1,12 +1,23 @@
 // typst-show.typ
-// Entry point injected by Quarto. Quarto provides `title`, `authors`, and
-// `date` as Typst variables from the document YAML front matter.
-// All visual configuration is read from `_business-report-config.typ`.
-
-#import "typst-template.typ": business-report-format
+// Entry point injected by Quarto/Pandoc.
+// Metadata is passed via Pandoc placeholders instead of assuming Typst
+// variables are pre-bound in the generated report.typ.
 
 #show: business-report-format.with(
-  title:   title,
-  authors: authors,
-  date:    date,
+$if(title)$
+  title: [$title$],
+$endif$
+$if(by-author)$
+  authors: [
+$for(by-author)$
+    $if(by-author.name)$$by-author.name$$else$$by-author$$endif$$if(by-author.affiliation)$
+    $by-author.affiliation$
+$endif$$sep$
+
+$endfor$
+  ],
+$endif$
+$if(date)$
+  date: [$date$],
+$endif$
 )
