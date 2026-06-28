@@ -70,12 +70,14 @@ test_that("bundled Typst extension uses root-based imports and current outline A
   expect_match(template_text, 'logo-path:    "../../assets/logo.svg"', fixed = TRUE)
   expect_match(template_text, 'cover-image:  _cover-image', fixed = TRUE)
   expect_match(template_text, 'cover-title-color: _cover-title-color', fixed = TRUE)
+  expect_match(template_text, 'font-family:  _font-family', fixed = TRUE)
 
   expect_match(cover_text, 'set text(fill: text-on-dark)', fixed = TRUE)
   expect_no_match(cover_text, 'font: "inherit"', fixed = TRUE)
   expect_match(cover_text, 'if cover-image != none', fixed = TRUE)
   expect_match(cover_text, 'dx: cover-title-x', fixed = TRUE)
   expect_match(cover_text, 'fill: cover-title-color', fixed = TRUE)
+  expect_match(cover_text, 'font: font-family', fixed = TRUE)
 
   for (toc_text in list(modern_toc, classic_toc, minimal_toc)) {
     expect_match(toc_text, 'it.element.body', fixed = TRUE)
@@ -91,6 +93,8 @@ test_that("bundled Typst extension uses root-based imports and current outline A
   expect_match(cards_toc, 'cap.body', fixed = TRUE)
   expect_match(cards_toc, 'sec.body', fixed = TRUE)
   expect_match(cards_toc, 'font-family', fixed = TRUE)
+  expect_match(cards_toc, 'context {', fixed = TRUE)
+  expect_match(cards_toc, 'let cards = query(heading.where(level: 1))', fixed = TRUE)
 })
 
 test_that("create_business_report() writes cover_image to config when provided", {
@@ -117,6 +121,30 @@ test_that("create_business_report() writes cover_image to config when provided",
     expect_match(config_text, 'cover-title-color:\\s+rgb\\("#FFFFFF"\\)')
     expect_match(config_text, 'cover-title-x:\\s+18mm')
     expect_match(config_text, 'cover-title-y:\\s+110mm')
+  })
+})
+
+test_that("create_business_report() rejects invalid cover_image values", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    expect_error(
+      create_business_report("bad-cover-image", cover_image = 1, open = FALSE),
+      regexp = "cover_image"
+    )
+  })
+})
+
+test_that("create_business_report() rejects invalid Typst lengths for cover title", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    expect_error(
+      create_business_report("bad-cover-x", cover_title_x = "18", open = FALSE),
+      regexp = "cover_title_x"
+    )
+    expect_error(
+      create_business_report("bad-cover-y", cover_title_y = "abc", open = FALSE),
+      regexp = "cover_title_y"
+    )
   })
 })
 
@@ -192,6 +220,22 @@ test_that("set_toc_style() updates config file correctly", {
   })
 })
 
+test_that("set_primary_color() updates config file correctly", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    create_business_report("proj", open = FALSE)
+    set_primary_color("proj", color = "#8B1A1A")
+    config_text <- paste(
+      readLines(
+        fs::path("proj", "_extensions", "business-report", "_business-report-config.typ"),
+        warn = FALSE
+      ),
+      collapse = "\n"
+    )
+    expect_match(config_text, 'primary-color:\\s+rgb\\("#8B1A1A"\\)')
+  })
+})
+
 test_that("toggle_cover() updates config file correctly", {
   skip_if_not_installed("withr")
   withr::with_tempdir({
@@ -205,5 +249,56 @@ test_that("toggle_cover() updates config file correctly", {
       collapse = "\n"
     )
     expect_match(config_text, "cover:\\s+false")
+  })
+})
+
+test_that("toggle_back_cover() updates config file correctly", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    create_business_report("proj", back_cover = TRUE, open = FALSE)
+    toggle_back_cover("proj", back_cover = FALSE)
+    config_text <- paste(
+      readLines(
+        fs::path("proj", "_extensions", "business-report", "_business-report-config.typ"),
+        warn = FALSE
+      ),
+      collapse = "\n"
+    )
+    expect_match(config_text, "back-cover:\\s+false")
+  })
+})
+
+test_that("config updates rewrite manually edited spacing into normalized format", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    create_business_report("proj", open = FALSE)
+
+    config_path <- fs::path("proj", "_extensions", "business-report", "_business-report-config.typ")
+    writeLines(
+      c(
+        "#let business-config = (",
+        'font-family:"Georgia",',
+        'primary-color:rgb("#1a3a5c"),',
+        "toc-style:1,",
+        "cover:true,",
+        "cover-image:none,",
+        'cover-title-color:rgb("#FFFFFF"),',
+        "cover-title-x:18mm,",
+        "cover-title-y:110mm,",
+        "back-cover:true,",
+        'lang:"pt",',
+        ")"
+      ),
+      config_path
+    )
+
+    set_font("proj", font = "inter")
+
+    config_lines <- readLines(config_path, warn = FALSE)
+    config_text <- paste(config_lines, collapse = "\n")
+
+    expect_match(config_text, 'font-family:\\s+"Inter"', perl = TRUE)
+    expect_true(any(grepl("^  font-family:\\s+\"Inter\",$", config_lines)))
+    expect_true(any(grepl("^  back-cover:\\s+true,$", config_lines)))
   })
 })

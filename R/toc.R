@@ -74,9 +74,9 @@ set_toc_style <- function(path = ".", style) {
   style <- .check_toc_style(style)
   .update_config_key(path, "toc-style", as.character(style))
   toc_name <- .toc_registry[.toc_registry[["id"]] == style, "name"]
-  cli::cli_inform(
-    c("v" = "Estilo do sumario atualizado para {.strong {toc_name}} (estilo {style}).",
-      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudanca.")
+  .inform_config_update(
+    "Estilo do sumario atualizado para {.strong {toc_name}} (estilo {style}).",
+    .envir = environment()
   )
   invisible(path)
 }
@@ -107,9 +107,9 @@ set_primary_color <- function(path = ".", color) {
   rlang::check_required(color)
   .check_color(color)
   .update_config_key(path, "primary-color", glue::glue('rgb("{color}")'))
-  cli::cli_inform(
-    c("v" = "Cor primaria atualizada para {.val {color}}.",
-      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudanca.")
+  .inform_config_update(
+    "Cor primaria atualizada para {.val {color}}.",
+    .envir = environment()
   )
   invisible(path)
 }
@@ -129,11 +129,10 @@ set_primary_color <- function(path = ".", color) {
 #'
 #' @export
 toggle_cover <- function(path = ".", cover) {
-  rlang::check_required(cover)
-  bool_val <- if (isTRUE(cover)) "true" else "false"
-  .update_config_key(path, "cover", bool_val)
-  label <- if (isTRUE(cover)) "ativada" else "desativada"
-  cli::cli_inform(c("v" = "Capa {label}."))
+  cover <- .check_flag(cover, "cover")
+  .update_config_key(path, "cover", .bool_to_typst(cover))
+  label <- if (cover) "ativada" else "desativada"
+  .inform_config_update("Capa {label}.", rerender = FALSE, .envir = environment())
   invisible(path)
 }
 
@@ -153,10 +152,9 @@ toggle_cover <- function(path = ".", cover) {
 #'
 #' @export
 toggle_back_cover <- function(path = ".", back_cover) {
-  rlang::check_required(back_cover)
-  bool_val <- if (isTRUE(back_cover)) "true" else "false"
-  .update_config_key(path, "back-cover", bool_val)
-  label <- if (isTRUE(back_cover)) "ativada" else "desativada"
-  cli::cli_inform(c("v" = "Contracapa {label}."))
+  back_cover <- .check_flag(back_cover, "back_cover")
+  .update_config_key(path, "back-cover", .bool_to_typst(back_cover))
+  label <- if (back_cover) "ativada" else "desativada"
+  .inform_config_update("Contracapa {label}.", rerender = FALSE, .envir = environment())
   invisible(path)
 }

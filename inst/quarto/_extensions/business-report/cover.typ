@@ -6,6 +6,7 @@
   title:         "",
   authors:       none,
   date:          "",
+  font-family:   "Georgia",
   primary-color: rgb("#1a3a5c"),
   cover-image:   none,
   cover-title-color: white,
@@ -29,7 +30,13 @@
       dy: cover-title-y,
       box(
         width: 140mm,
-        text(size: 30pt, weight: "bold", tracking: -0.3pt, fill: cover-title-color)[#title]
+        text(
+          font: font-family,
+          size: 30pt,
+          weight: "bold",
+          tracking: -0.3pt,
+          fill: cover-title-color
+        )[#title]
       )
     )
   } else {
@@ -65,7 +72,7 @@
         }
 
         set text(fill: text-on-dark)
-        text(size: 30pt, weight: "bold", tracking: -0.3pt)[#title]
+        text(font: font-family, size: 30pt, weight: "bold", tracking: -0.3pt)[#title]
       }
     )
 
@@ -77,7 +84,7 @@
       inset:  (x: 3.5cm, top: 2.2cm, bottom: 1cm),
       {
         set align(top + left)
-        set text(fill: text-body)
+        set text(font: font-family, fill: text-body)
 
         grid(
           columns: (0.4cm, 1fr),

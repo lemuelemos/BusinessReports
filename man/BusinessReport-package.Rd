@@ -8,7 +8,7 @@
 \description{
 Fornece modelos profissionais de relatorios em Quarto com renderizacao via
 Typst para usos corporativos, analiticos e tecnicos. Inclui capa e
-contracapa opcionais, uma colecao curada de fontes e tres estilos distintos
+contracapa opcionais, uma colecao curada de fontes e quatro estilos
 de sumario.
 }
 \seealso{

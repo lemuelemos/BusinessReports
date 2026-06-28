@@ -43,8 +43,8 @@ menos que \code{overwrite = TRUE}.}
 
 \item{primary_color}{Cor hexadecimal de destaque com \verb{#}.}
 
-\item{toc_style}{Estilo do sumario: \code{1} (Classico), \code{2} (Moderno) ou
-\code{3} (Minimalista).}
+\item{toc_style}{Estilo do sumario: \code{1} (Classico), \code{2} (Moderno),
+\code{3} (Minimalista) ou \code{4} (Cards).}
 
 \item{cover}{Logico. Se \code{TRUE}, inclui capa.}
 

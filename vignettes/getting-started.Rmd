@@ -63,6 +63,7 @@ meu-relatorio/
         ├── back-cover.typ
         └── toc/
             ├── toc-classic.typ
+            ├── toc-cards.typ
             ├── toc-modern.typ
             └── toc-minimal.typ
 ```
@@ -90,7 +91,7 @@ set_font("meu-relatorio", font = "palatino")
 
 ## Estilos de sumário
 
-Há três estilos disponíveis:
+Há quatro estilos disponíveis:
 
 ```{r toc}
 list_toc_styles()

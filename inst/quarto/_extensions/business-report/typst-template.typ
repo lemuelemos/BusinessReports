@@ -213,6 +213,7 @@
       title:        title,
       authors:      authors,
       date:         date,
+      font-family:  _font-family,
       primary-color: _primary-color,
       cover-image:  _cover-image,
       cover-title-color: _cover-title-color,
