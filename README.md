@@ -12,7 +12,7 @@ para relatórios corporativos e analíticos. Com uma chamada de função, você 
 um projeto Quarto completo com:
 
 - Capa e contracapa opcionais
-- Três estilos distintos de sumário
+- Quatro estilos distintos de sumário
 - Fontes serifadas e sem serifa curadas para relatórios
 - Layout profissional A4 com hierarquia tipográfica consistente
 - Cor de destaque única aplicada a todo o modelo
@@ -78,6 +78,7 @@ list_toc_styles()
 | 1 | Clássico | Dot leaders e capítulos em destaque |
 | 2 | Moderno | Barra lateral colorida e badge de página |
 | 3 | Minimalista | Hierarquia limpa com poucos ornamentos |
+| 4 | Cards | Blocos executivos com subseções agrupadas |
 
 ## Personalização
 
@@ -106,6 +107,7 @@ meu-relatorio/
         ├── back-cover.typ
         └── toc/
             ├── toc-classic.typ
+            ├── toc-cards.typ
             ├── toc-modern.typ
             └── toc-minimal.typ
 ```

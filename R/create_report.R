@@ -24,8 +24,8 @@
 #' @param date Data do relatorio. O padrao e a data de hoje.
 #' @param font Identificador da fonte. Use [list_fonts()] para ver as opcoes.
 #' @param primary_color Cor hexadecimal de destaque com `#`.
-#' @param toc_style Estilo do sumario: `1` (Classico), `2` (Moderno) ou
-#'   `3` (Minimalista).
+#' @param toc_style Estilo do sumario: `1` (Classico), `2` (Moderno),
+#'   `3` (Minimalista) ou `4` (Cards).
 #' @param cover Logico. Se `TRUE`, inclui capa.
 #' @param cover_image Caminho da imagem de capa relativa a raiz do projeto,
 #'   por exemplo `"assets/minha-capa.png"`. Se `NULL` ou `""`, usa a capa
@@ -92,9 +92,12 @@ create_business_report <- function(
   .check_color(primary_color)
   .check_color(cover_title_color)
   toc_style <- .check_toc_style(toc_style)
+  cover <- .check_flag(cover, "cover")
   cover_image <- .normalize_cover_image_path(cover_image)
   cover_title_x <- .normalize_typst_length(cover_title_x, "cover_title_x")
   cover_title_y <- .normalize_typst_length(cover_title_y, "cover_title_y")
+  back_cover <- .check_flag(back_cover, "back_cover")
+  open <- .check_flag(open, "open")
 
   if (is.null(date)) {
     date <- .format_date(Sys.Date(), lang)
@@ -168,7 +171,7 @@ create_business_report <- function(
     " " = "   {.fn set_primary_color} para ajustar o visual sem recriar o projeto."
   ))
 
-  if (isTRUE(open)) {
+  if (open) {
     open_report(path)
   }
 
@@ -194,8 +197,6 @@ open_report <- function(path = ".") {
   }
   invisible(path)
 }
-
-`%||%` <- function(x, y) if (is.null(x)) y else x
 
 .format_date <- function(date, lang = "pt") {
   if (lang == "pt") {

@@ -12,7 +12,7 @@ Authors@R: c(
   )
 Description: Fornece templates profissionais de relatórios em Quarto com
     renderização via Typst para usos corporativos, analíticos e técnicos.
-    Inclui capa e contracapa opcionais, uma coleção curada de fontes e três
+    Inclui capa e contracapa opcionais, uma coleção curada de fontes e quatro
     estilos distintos de sumário. Os relatórios são criados como projetos
     Quarto autocontidos, fáceis de versionar e estender.
 License: MIT + file LICENSE

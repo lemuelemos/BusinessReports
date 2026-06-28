@@ -108,10 +108,10 @@ list_fonts <- function() {
 set_font <- function(path = ".", font) {
   rlang::check_required(font)
   typst_family <- .check_font_id(font)
-  .update_config_key(path, "font-family", glue::glue('"{typst_family}"'))
-  cli::cli_inform(
-    c("v" = "Fonte atualizada para {.strong {typst_family}}.",
-      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudanca.")
+  .update_config_key(path, "font-family", .typst_string(typst_family))
+  .inform_config_update(
+    "Fonte atualizada para {.strong {typst_family}}.",
+    .envir = environment()
   )
   invisible(path)
 }
