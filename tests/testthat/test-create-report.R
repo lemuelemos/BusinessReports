@@ -83,7 +83,7 @@ test_that("create_business_report() errors if path exists and overwrite = FALSE"
     fs::dir_create("exists-already")
     expect_error(
       create_business_report("exists-already", open = FALSE),
-      regexp = "já existe"
+      regexp = "ja existe"
     )
   })
 })

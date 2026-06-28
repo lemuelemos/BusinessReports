@@ -2,24 +2,24 @@
 
 .toc_registry <- data.frame(
   id = 1L:3L,
-  name = c("Clássico", "Moderno", "Minimalista"),
+  name = c("Classico", "Moderno", "Minimalista"),
   description = c(
     paste0(
-      "Estilo tipográfico clássico. ",
-      "Entradas de capítulo em negrito com o acento da cor primária. ",
-      "Pontos de preenchimento conectando título e número de página. ",
-      "Seções recuadas e subcapítulos em peso regular."
+      "Estilo tipografico classico. ",
+      "Entradas de capitulo em negrito com o acento da cor primaria. ",
+      "Pontos de preenchimento conectando titulo e numero de pagina. ",
+      "Secoes recuadas e subcapitulos em peso regular."
     ),
     paste0(
-      "Estilo contemporâneo com barra lateral colorida. ",
-      "Capítulos destacados com retângulo de cor primária à esquerda. ",
-      "Números de página em caixas coloridas. ",
-      "Espaçamento generoso entre entradas."
+      "Estilo contemporaneo com barra lateral colorida. ",
+      "Capitulos destacados com retangulo de cor primaria a esquerda. ",
+      "Numeros de pagina em caixas coloridas. ",
+      "Espacamento generoso entre entradas."
     ),
     paste0(
-      "Estilo minimalista, com máximo espaço em branco. ",
-      "Sem líderes de pontos nem decorações. ",
-      "Número de página alinhado à direita. ",
+      "Estilo minimalista, com maximo espaco em branco. ",
+      "Sem lideres de pontos nem decoracoes. ",
+      "Numero de pagina alinhado a direita. ",
       "Hierarquia transmitida por tamanho de fonte e recuo."
     )
   ),
@@ -27,10 +27,10 @@
   stringsAsFactors = FALSE
 )
 
-#' Liste os três estilos de sumário disponíveis em `BusinessReport`
+#' Liste os tres estilos de sumario disponiveis em `BusinessReport`
 #'
 #' @description
-#' Retorna um data frame descrevendo cada estilo de sumário. Passe o valor de
+#' Retorna um data frame descrevendo cada estilo de sumario. Passe o valor de
 #' `id` (1, 2 ou 3) para [create_business_report()] ou [set_toc_style()].
 #'
 #' @return Um data frame com as colunas `id`, `name` e `description`.
@@ -44,16 +44,16 @@ list_toc_styles <- function() {
 }
 
 
-#' Altere o estilo do sumário de um projeto `BusinessReport` existente
+#' Altere o estilo do sumario de um projeto `BusinessReport` existente
 #'
 #' @description
 #' Atualiza `_extensions/business-report/_business-report-config.typ` no local,
 #' definindo `toc-style` para o valor escolhido. Re-renderize para ver o efeito.
 #'
-#' @param path Diretório raiz do projeto. O padrão é o diretório de trabalho
+#' @param path Diretorio raiz do projeto. O padrao e o diretorio de trabalho
 #'   atual.
-#' @param style Inteiro: `1` (Clássico), `2` (Moderno) ou `3` (Minimalista).
-#'   Use [list_toc_styles()] para ver as descrições.
+#' @param style Inteiro: `1` (Classico), `2` (Moderno) ou `3` (Minimalista).
+#'   Use [list_toc_styles()] para ver as descricoes.
 #'
 #' @return `path`, invisivelmente.
 #'
@@ -69,23 +69,23 @@ set_toc_style <- function(path = ".", style) {
   .update_config_key(path, "toc-style", as.character(style))
   toc_name <- .toc_registry[.toc_registry[["id"]] == style, "name"]
   cli::cli_inform(
-    c("v" = "Estilo do sumário atualizado para {.strong {toc_name}} (estilo {style}).",
-      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudança.")
+    c("v" = "Estilo do sumario atualizado para {.strong {toc_name}} (estilo {style}).",
+      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudanca.")
   )
   invisible(path)
 }
 
 
-#' Altere a cor primária de destaque de um projeto `BusinessReport` existente
+#' Altere a cor primaria de destaque de um projeto `BusinessReport` existente
 #'
 #' @description
 #' Atualiza `_extensions/business-report/_business-report-config.typ` com uma
-#' nova cor primária. A cor é aplicada a títulos, capa, sumário e elementos
-#' decorativos ao longo do relatório.
+#' nova cor primaria. A cor e aplicada a titulos, capa, sumario e elementos
+#' decorativos ao longo do relatorio.
 #'
-#' @param path Diretório raiz do projeto. O padrão é o diretório de trabalho
+#' @param path Diretorio raiz do projeto. O padrao e o diretorio de trabalho
 #'   atual.
-#' @param color Cor hexadecimal de seis dígitos com `#`, por exemplo
+#' @param color Cor hexadecimal de seis digitos com `#`, por exemplo
 #'   `"#2d6a9a"`.
 #'
 #' @return `path`, invisivelmente.
@@ -102,8 +102,8 @@ set_primary_color <- function(path = ".", color) {
   .check_color(color)
   .update_config_key(path, "primary-color", glue::glue('rgb("{color}")'))
   cli::cli_inform(
-    c("v" = "Cor primária atualizada para {.val {color}}.",
-      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudança.")
+    c("v" = "Cor primaria atualizada para {.val {color}}.",
+      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudanca.")
   )
   invisible(path)
 }
@@ -111,8 +111,8 @@ set_primary_color <- function(path = ".", color) {
 
 #' Ative ou desative a capa de um projeto `BusinessReport` existente
 #'
-#' @param path Diretório raiz do projeto.
-#' @param cover Lógico. `TRUE` para incluir a capa; `FALSE` para removê-la.
+#' @param path Diretorio raiz do projeto.
+#' @param cover Logico. `TRUE` para incluir a capa; `FALSE` para remove-la.
 #'
 #' @return `path`, invisivelmente.
 #'
@@ -134,9 +134,9 @@ toggle_cover <- function(path = ".", cover) {
 
 #' Ative ou desative a contracapa de um projeto `BusinessReport` existente
 #'
-#' @param path Diretório raiz do projeto.
-#' @param back_cover Lógico. `TRUE` para incluir a contracapa; `FALSE` para
-#'   removê-la.
+#' @param path Diretorio raiz do projeto.
+#' @param back_cover Logico. `TRUE` para incluir a contracapa; `FALSE` para
+#'   remove-la.
 #'
 #' @return `path`, invisivelmente.
 #'

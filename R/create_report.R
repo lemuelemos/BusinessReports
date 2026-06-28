@@ -3,34 +3,34 @@
 #' Crie um novo projeto Quarto do `BusinessReport`
 #'
 #' @description
-#' Gera um projeto Quarto/Typst pronto para renderização. A função:
+#' Gera um projeto Quarto/Typst pronto para renderizacao. A funcao:
 #' \enumerate{
-#'   \item cria o diretório do projeto;
-#'   \item copia a extensão Quarto (`_extensions/business-report/`);
+#'   \item cria o diretorio do projeto;
+#'   \item copia a extensao Quarto (`_extensions/business-report/`);
 #'   \item gera `_extensions/business-report/_business-report-config.typ`;
 #'   \item copia a pasta `assets/` com arquivos de imagem iniciais;
-#'   \item escreve o esqueleto de `report.qmd` com título e metadados.
+#'   \item escreve o esqueleto de `report.qmd` com titulo e metadados.
 #' }
 #'
-#' Após a criação, abra `report.qmd` e renderize com
-#' `quarto::quarto_render("report.qmd")` ou pelo botão Render do RStudio.
+#' Apos a criacao, abra `report.qmd` e renderize com
+#' `quarto::quarto_render("report.qmd")` ou pelo botao Render do RStudio.
 #'
-#' @param path Caminho para o novo diretório do projeto. Não deve existir, a
+#' @param path Caminho para o novo diretorio do projeto. Nao deve existir, a
 #'   menos que `overwrite = TRUE`.
-#' @param title Título do relatório.
-#' @param subtitle Subtítulo opcional.
+#' @param title Titulo do relatorio.
+#' @param subtitle Subtitulo opcional.
 #' @param author Nome do autor.
-#' @param institution Nome da instituição ou organização.
-#' @param date Data do relatório. O padrão é a data de hoje.
-#' @param font Identificador da fonte. Use [list_fonts()] para ver as opções.
+#' @param institution Nome da instituicao ou organizacao.
+#' @param date Data do relatorio. O padrao e a data de hoje.
+#' @param font Identificador da fonte. Use [list_fonts()] para ver as opcoes.
 #' @param primary_color Cor hexadecimal de destaque com `#`.
-#' @param toc_style Estilo do sumário: `1` (Clássico), `2` (Moderno) ou
+#' @param toc_style Estilo do sumario: `1` (Classico), `2` (Moderno) ou
 #'   `3` (Minimalista).
-#' @param cover Lógico. Se `TRUE`, inclui capa.
-#' @param back_cover Lógico. Se `TRUE`, inclui contracapa.
-#' @param lang Tag BCP 47 de idioma. O padrão é `"pt"`.
-#' @param overwrite Lógico. Se `TRUE`, sobrescreve um diretório existente.
-#' @param open Lógico. Se `TRUE`, abre `report.qmd` na IDE após a criação.
+#' @param cover Logico. Se `TRUE`, inclui capa.
+#' @param back_cover Logico. Se `TRUE`, inclui contracapa.
+#' @param lang Tag BCP 47 de idioma. O padrao e `"pt"`.
+#' @param overwrite Logico. Se `TRUE`, sobrescreve um diretorio existente.
+#' @param open Logico. Se `TRUE`, abre `report.qmd` na IDE apos a criacao.
 #'
 #' @return `path`, invisivelmente.
 #'
@@ -40,9 +40,9 @@
 #'
 #' create_business_report(
 #'   path = "relatorio-2025",
-#'   title = "Relatório Anual: 2025",
-#'   subtitle = "Análise de Adequação de Capital",
-#'   author = "Gerência de Modelagem e Monitoramento",
+#'   title = "Relatorio Anual: 2025",
+#'   subtitle = "Analise de Adequacao de Capital",
+#'   author = "Gerencia de Modelagem e Monitoramento",
 #'   institution = "FGCoop",
 #'   font = "ibm-plex",
 #'   primary_color = "#0d3d6e",
@@ -55,7 +55,7 @@
 #' @export
 create_business_report <- function(
   path,
-  title         = "Relatório Empresarial",
+  title         = "Relatorio Empresarial",
   subtitle      = NULL,
   author        = NULL,
   institution   = NULL,
@@ -88,8 +88,8 @@ create_business_report <- function(
   if (fs::dir_exists(path) && !overwrite) {
     cli::cli_abort(
       c(
-        "O diretório {.path {path}} já existe.",
-        "i" = "Use {.code overwrite = TRUE} para sobrescrevê-lo."
+        "O diretorio {.path {path}} ja existe.",
+        "i" = "Use {.code overwrite = TRUE} para sobrescreve-lo."
       )
     )
   }
@@ -101,10 +101,10 @@ create_business_report <- function(
   ext_dest <- .ext_dest(path)
   fs::dir_create(fs::path(path, "_extensions", "business-report"), recurse = TRUE)
 
-  cli::cli_progress_step("Copiando a extensão Quarto")
+  cli::cli_progress_step("Copiando a extensao Quarto")
   fs::dir_copy(.ext_source(), ext_dest, overwrite = TRUE)
 
-  cli::cli_progress_step("Escrevendo a configuração")
+  cli::cli_progress_step("Escrevendo a configuracao")
   .write_config(
     path          = path,
     font_family   = typst_family,
@@ -119,7 +119,7 @@ create_business_report <- function(
   fs::dir_create(assets_dest)
   fs::dir_copy(.assets_source(), assets_dest, overwrite = TRUE)
 
-  cli::cli_progress_step("Escrevendo o esqueleto do relatório")
+  cli::cli_progress_step("Escrevendo o esqueleto do relatorio")
   .write_skeleton(
     path        = path,
     title       = title,
@@ -134,7 +134,7 @@ create_business_report <- function(
     "",
     "v" = "Projeto pronto: {.path {path}}",
     "",
-    "*" = "Próximos passos:",
+    "*" = "Proximos passos:",
     " " = "1. Substitua {.file assets/logo.svg} pelo seu logo.",
     " " = "2. Abra {.file report.qmd} e comece a escrever.",
     " " = "3. Renderize com {.code quarto::quarto_render(\"report.qmd\")}.",
@@ -153,7 +153,7 @@ create_business_report <- function(
 
 #' Abra o arquivo principal de um projeto `BusinessReport` na IDE
 #'
-#' @param path Diretório raiz do projeto. O padrão é `"."`.
+#' @param path Diretorio raiz do projeto. O padrao e `"."`.
 #'
 #' @return `path`, invisivelmente.
 #'
@@ -175,7 +175,7 @@ open_report <- function(path = ".") {
 .format_date <- function(date, lang = "pt") {
   if (lang == "pt") {
     months_pt <- c(
-      "janeiro", "fevereiro", "março", "abril",
+      "janeiro", "fevereiro", "marco", "abril",
       "maio", "junho", "julho", "agosto",
       "setembro", "outubro", "novembro", "dezembro"
     )

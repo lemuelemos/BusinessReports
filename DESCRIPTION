@@ -22,8 +22,7 @@ Imports:
     cli      (>= 3.6.0),
     fs       (>= 1.6.0),
     glue     (>= 1.7.0),
-    rlang    (>= 1.1.0),
-    yaml     (>= 2.3.0)
+    rlang    (>= 1.1.0)
 Suggests:
     pkgdown     (>= 2.1.0),
     quarto      (>= 1.4),

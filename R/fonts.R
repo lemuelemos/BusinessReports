@@ -56,11 +56,11 @@
   stringsAsFactors = FALSE
 )
 
-#' Liste todas as fontes disponíveis em `BusinessReport`
+#' Liste todas as fontes disponiveis em `BusinessReport`
 #'
 #' @description
-#' Retorna um data frame com metadados para cada fonte disponível em
-#' `BusinessReport`. A coluna `id` é o valor usado em
+#' Retorna um data frame com metadados para cada fonte disponivel em
+#' `BusinessReport`. A coluna `id` e o valor usado em
 #' [create_business_report()] e [set_font()].
 #'
 #' Fontes com `license = "Sistema"` costumam vir instaladas no sistema.
@@ -74,7 +74,7 @@
 #' @examples
 #' list_fonts()
 #'
-#' # Filtrar apenas as opções sem serifa
+#' # Filtrar apenas as opcoes sem serifa
 #' fonts <- list_fonts()
 #' fonts[fonts$style == "Sem serifa", c("id", "display_name", "famous_use")]
 #'
@@ -91,10 +91,10 @@ list_fonts <- function() {
 #' modificando o valor de `font-family`. Re-renderize o documento Quarto para
 #' ver o efeito.
 #'
-#' @param path Caminho para a raiz do projeto. O padrão é o diretório de
+#' @param path Caminho para a raiz do projeto. O padrao e o diretorio de
 #'   trabalho atual.
 #' @param font Identificador da fonte. Use [list_fonts()] para ver os valores
-#'   válidos.
+#'   validos.
 #'
 #' @return `path`, invisivelmente.
 #'
@@ -111,7 +111,7 @@ set_font <- function(path = ".", font) {
   .update_config_key(path, "font-family", glue::glue('"{typst_family}"'))
   cli::cli_inform(
     c("v" = "Fonte atualizada para {.strong {typst_family}}.",
-      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudança.")
+      "i" = "Re-renderize seu arquivo {.file .qmd} para ver a mudanca.")
   )
   invisible(path)
 }
