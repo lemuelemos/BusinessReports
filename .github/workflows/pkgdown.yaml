@@ -31,7 +31,9 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown
+          extra-packages: |
+            any::pkgdown
+            any::roxygen2
           needs: website
 
       - uses: r-lib/actions/setup-tinytex@v2

@@ -27,6 +27,7 @@ Imports:
 Suggests:
     pkgdown     (>= 2.1.0),
     quarto      (>= 1.4),
+    roxygen2    (>= 7.3.0),
     testthat    (>= 3.0.0),
     knitr       (>= 1.45),
     rmarkdown   (>= 2.25),
