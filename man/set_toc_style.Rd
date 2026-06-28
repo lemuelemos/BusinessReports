@@ -2,16 +2,16 @@
 % Please edit documentation in R/toc.R
 \name{set_toc_style}
 \alias{set_toc_style}
-\title{Altere o estilo do sumário de um projeto \code{BusinessReport} existente}
+\title{Altere o estilo do sumario de um projeto \code{BusinessReport} existente}
 \usage{
 set_toc_style(path = ".", style)
 }
 \arguments{
-\item{path}{Diretório raiz do projeto. O padrão é o diretório de trabalho
+\item{path}{Diretorio raiz do projeto. O padrao e o diretorio de trabalho
 atual.}
 
-\item{style}{Inteiro: \code{1} (Clássico), \code{2} (Moderno) ou \code{3} (Minimalista).
-Use \code{\link[=list_toc_styles]{list_toc_styles()}} para ver as descrições.}
+\item{style}{Inteiro: \code{1} (Classico), \code{2} (Moderno) ou \code{3} (Minimalista).
+Use \code{\link[=list_toc_styles]{list_toc_styles()}} para ver as descricoes.}
 }
 \value{
 \code{path}, invisivelmente.

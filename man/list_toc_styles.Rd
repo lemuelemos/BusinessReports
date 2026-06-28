@@ -2,7 +2,7 @@
 % Please edit documentation in R/toc.R
 \name{list_toc_styles}
 \alias{list_toc_styles}
-\title{Liste os três estilos de sumário disponíveis em \code{BusinessReport}}
+\title{Liste os tres estilos de sumario disponiveis em \code{BusinessReport}}
 \usage{
 list_toc_styles()
 }
@@ -10,7 +10,7 @@ list_toc_styles()
 Um data frame com as colunas \code{id}, \code{name} e \code{description}.
 }
 \description{
-Retorna um data frame descrevendo cada estilo de sumário. Passe o valor de
+Retorna um data frame descrevendo cada estilo de sumario. Passe o valor de
 \code{id} (1, 2 ou 3) para \code{\link[=create_business_report]{create_business_report()}} ou \code{\link[=set_toc_style]{set_toc_style()}}.
 }
 \examples{

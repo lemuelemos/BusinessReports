@@ -37,6 +37,5 @@ URL: https://lemuelemos.github.io/BusinessReports/,
     https://github.com/lemuelemos/BusinessReports
 BugReports: https://github.com/lemuelemos/BusinessReports/issues
 Language: pt-BR
-Config/roxygen2/version: 7.3.3
+Config/roxygen2/version: 8.0.0
 Config/Needs/website: pkgdown
-RoxygenNote: 7.3.3

@@ -7,11 +7,11 @@
 set_font(path = ".", font)
 }
 \arguments{
-\item{path}{Caminho para a raiz do projeto. O padrão é o diretório de
+\item{path}{Caminho para a raiz do projeto. O padrao e o diretorio de
 trabalho atual.}
 
 \item{font}{Identificador da fonte. Use \code{\link[=list_fonts]{list_fonts()}} para ver os valores
-válidos.}
+validos.}
 }
 \value{
 \code{path}, invisivelmente.

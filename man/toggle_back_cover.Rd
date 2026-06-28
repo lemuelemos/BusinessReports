@@ -7,10 +7,10 @@
 toggle_back_cover(path = ".", back_cover)
 }
 \arguments{
-\item{path}{Diretório raiz do projeto.}
+\item{path}{Diretorio raiz do projeto.}
 
-\item{back_cover}{Lógico. \code{TRUE} para incluir a contracapa; \code{FALSE} para
-removê-la.}
+\item{back_cover}{Logico. \code{TRUE} para incluir a contracapa; \code{FALSE} para
+remove-la.}
 }
 \value{
 \code{path}, invisivelmente.

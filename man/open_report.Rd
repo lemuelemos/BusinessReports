@@ -7,7 +7,7 @@
 open_report(path = ".")
 }
 \arguments{
-\item{path}{Diretório raiz do projeto. O padrão é \code{"."}.}
+\item{path}{Diretorio raiz do projeto. O padrao e \code{"."}.}
 }
 \value{
 \code{path}, invisivelmente.

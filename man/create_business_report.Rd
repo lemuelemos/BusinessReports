@@ -6,7 +6,7 @@
 \usage{
 create_business_report(
   path,
-  title = "Relatório Empresarial",
+  title = "Relatorio Empresarial",
   subtitle = NULL,
   author = NULL,
   institution = NULL,
@@ -22,51 +22,51 @@ create_business_report(
 )
 }
 \arguments{
-\item{path}{Caminho para o novo diretório do projeto. Não deve existir, a
+\item{path}{Caminho para o novo diretorio do projeto. Nao deve existir, a
 menos que \code{overwrite = TRUE}.}
 
-\item{title}{Título do relatório.}
+\item{title}{Titulo do relatorio.}
 
-\item{subtitle}{Subtítulo opcional.}
+\item{subtitle}{Subtitulo opcional.}
 
 \item{author}{Nome do autor.}
 
-\item{institution}{Nome da instituição ou organização.}
+\item{institution}{Nome da instituicao ou organizacao.}
 
-\item{date}{Data do relatório. O padrão é a data de hoje.}
+\item{date}{Data do relatorio. O padrao e a data de hoje.}
 
-\item{font}{Identificador da fonte. Use \code{\link[=list_fonts]{list_fonts()}} para ver as opções.}
+\item{font}{Identificador da fonte. Use \code{\link[=list_fonts]{list_fonts()}} para ver as opcoes.}
 
 \item{primary_color}{Cor hexadecimal de destaque com \verb{#}.}
 
-\item{toc_style}{Estilo do sumário: \code{1} (Clássico), \code{2} (Moderno) ou
+\item{toc_style}{Estilo do sumario: \code{1} (Classico), \code{2} (Moderno) ou
 \code{3} (Minimalista).}
 
-\item{cover}{Lógico. Se \code{TRUE}, inclui capa.}
+\item{cover}{Logico. Se \code{TRUE}, inclui capa.}
 
-\item{back_cover}{Lógico. Se \code{TRUE}, inclui contracapa.}
+\item{back_cover}{Logico. Se \code{TRUE}, inclui contracapa.}
 
-\item{lang}{Tag BCP 47 de idioma. O padrão é \code{"pt"}.}
+\item{lang}{Tag BCP 47 de idioma. O padrao e \code{"pt"}.}
 
-\item{overwrite}{Lógico. Se \code{TRUE}, sobrescreve um diretório existente.}
+\item{overwrite}{Logico. Se \code{TRUE}, sobrescreve um diretorio existente.}
 
-\item{open}{Lógico. Se \code{TRUE}, abre \code{report.qmd} na IDE após a criação.}
+\item{open}{Logico. Se \code{TRUE}, abre \code{report.qmd} na IDE apos a criacao.}
 }
 \value{
 \code{path}, invisivelmente.
 }
 \description{
-Gera um projeto Quarto/Typst pronto para renderização. A função:
+Gera um projeto Quarto/Typst pronto para renderizacao. A funcao:
 \enumerate{
-\item cria o diretório do projeto;
-\item copia a extensão Quarto (\verb{_extensions/business-report/});
+\item cria o diretorio do projeto;
+\item copia a extensao Quarto (\verb{_extensions/business-report/});
 \item gera \verb{_extensions/business-report/_business-report-config.typ};
 \item copia a pasta \verb{assets/} com arquivos de imagem iniciais;
-\item escreve o esqueleto de \code{report.qmd} com título e metadados.
+\item escreve o esqueleto de \code{report.qmd} com titulo e metadados.
 }
 
-Após a criação, abra \code{report.qmd} e renderize com
-\code{quarto::quarto_render("report.qmd")} ou pelo botão Render do RStudio.
+Apos a criacao, abra \code{report.qmd} e renderize com
+\code{quarto::quarto_render("report.qmd")} ou pelo botao Render do RStudio.
 }
 \examples{
 \dontrun{
@@ -74,9 +74,9 @@ create_business_report("meu-relatorio")
 
 create_business_report(
   path = "relatorio-2025",
-  title = "Relatório Anual: 2025",
-  subtitle = "Análise de Adequação de Capital",
-  author = "Gerência de Modelagem e Monitoramento",
+  title = "Relatorio Anual: 2025",
+  subtitle = "Analise de Adequacao de Capital",
+  author = "Gerencia de Modelagem e Monitoramento",
   institution = "FGCoop",
   font = "ibm-plex",
   primary_color = "#0d3d6e",

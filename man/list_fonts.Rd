@@ -2,7 +2,7 @@
 % Please edit documentation in R/fonts.R
 \name{list_fonts}
 \alias{list_fonts}
-\title{Liste todas as fontes disponíveis em \code{BusinessReport}}
+\title{Liste todas as fontes disponiveis em \code{BusinessReport}}
 \usage{
 list_fonts()
 }
@@ -11,8 +11,8 @@ Um data frame com as colunas \code{id}, \code{display_name}, \code{typst_family}
 \code{style}, \code{origin}, \code{license} e \code{famous_use}.
 }
 \description{
-Retorna um data frame com metadados para cada fonte disponível em
-\code{BusinessReport}. A coluna \code{id} é o valor usado em
+Retorna um data frame com metadados para cada fonte disponivel em
+\code{BusinessReport}. A coluna \code{id} e o valor usado em
 \code{\link[=create_business_report]{create_business_report()}} e \code{\link[=set_font]{set_font()}}.
 
 Fontes com \code{license = "Sistema"} costumam vir instaladas no sistema.
@@ -23,7 +23,7 @@ sistema. O Google Fonts pode ser usado para baixar essas fontes.
 \examples{
 list_fonts()
 
-# Filtrar apenas as opções sem serifa
+# Filtrar apenas as opcoes sem serifa
 fonts <- list_fonts()
 fonts[fonts$style == "Sem serifa", c("id", "display_name", "famous_use")]
 

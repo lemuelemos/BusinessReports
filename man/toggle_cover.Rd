@@ -7,9 +7,9 @@
 toggle_cover(path = ".", cover)
 }
 \arguments{
-\item{path}{Diretório raiz do projeto.}
+\item{path}{Diretorio raiz do projeto.}
 
-\item{cover}{Lógico. \code{TRUE} para incluir a capa; \code{FALSE} para removê-la.}
+\item{cover}{Logico. \code{TRUE} para incluir a capa; \code{FALSE} para remove-la.}
 }
 \value{
 \code{path}, invisivelmente.

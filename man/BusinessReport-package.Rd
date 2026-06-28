@@ -4,12 +4,12 @@
 \name{BusinessReport-package}
 \alias{BusinessReport}
 \alias{BusinessReport-package}
-\title{BusinessReport: Modelos profissionais de relatórios para Quarto/Typst}
+\title{BusinessReport: Modelos profissionais de relatorios para Quarto/Typst}
 \description{
-Fornece modelos profissionais de relatórios em Quarto com renderização via
-Typst para usos corporativos, analíticos e técnicos. Inclui capa e
-contracapa opcionais, uma coleção curada de fontes e três estilos distintos
-de sumário.
+Fornece modelos profissionais de relatorios em Quarto com renderizacao via
+Typst para usos corporativos, analiticos e tecnicos. Inclui capa e
+contracapa opcionais, uma colecao curada de fontes e tres estilos distintos
+de sumario.
 }
 \seealso{
 Useful links:
@@ -22,6 +22,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Lemuel Lemos \email{lemuelemos@gmail.com}
+
+Authors:
+\itemize{
+  \item Lemuel Lemos \email{lemuelemos@gmail.com}
+}
 
 }
 \keyword{internal}

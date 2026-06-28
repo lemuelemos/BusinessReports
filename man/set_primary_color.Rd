@@ -2,15 +2,15 @@
 % Please edit documentation in R/toc.R
 \name{set_primary_color}
 \alias{set_primary_color}
-\title{Altere a cor primária de destaque de um projeto \code{BusinessReport} existente}
+\title{Altere a cor primaria de destaque de um projeto \code{BusinessReport} existente}
 \usage{
 set_primary_color(path = ".", color)
 }
 \arguments{
-\item{path}{Diretório raiz do projeto. O padrão é o diretório de trabalho
+\item{path}{Diretorio raiz do projeto. O padrao e o diretorio de trabalho
 atual.}
 
-\item{color}{Cor hexadecimal de seis dígitos com \verb{#}, por exemplo
+\item{color}{Cor hexadecimal de seis digitos com \verb{#}, por exemplo
 \code{"#2d6a9a"}.}
 }
 \value{
@@ -18,8 +18,8 @@ atual.}
 }
 \description{
 Atualiza \verb{_extensions/business-report/_business-report-config.typ} com uma
-nova cor primária. A cor é aplicada a títulos, capa, sumário e elementos
-decorativos ao longo do relatório.
+nova cor primaria. A cor e aplicada a titulos, capa, sumario e elementos
+decorativos ao longo do relatorio.
 }
 \examples{
 \dontrun{
