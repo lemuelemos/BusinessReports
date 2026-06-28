@@ -11,7 +11,6 @@
   let text-dark    = luma(30)
   let text-muted   = luma(110)
   let surface      = luma(247)
-  let cards        = query(heading.where(level: 1))
 
   set text(font: font-family)
   v(0.7cm)
@@ -31,6 +30,7 @@
   v(0.5cm)
 
   context {
+    let cards = query(heading.where(level: 1))
     let rendered = cards.enumerate().map(((idx, cap)) => {
       let secs = if idx + 1 < cards.len() {
         query(

@@ -70,12 +70,14 @@ test_that("bundled Typst extension uses root-based imports and current outline A
   expect_match(template_text, 'logo-path:    "../../assets/logo.svg"', fixed = TRUE)
   expect_match(template_text, 'cover-image:  _cover-image', fixed = TRUE)
   expect_match(template_text, 'cover-title-color: _cover-title-color', fixed = TRUE)
+  expect_match(template_text, 'font-family:  _font-family', fixed = TRUE)
 
   expect_match(cover_text, 'set text(fill: text-on-dark)', fixed = TRUE)
   expect_no_match(cover_text, 'font: "inherit"', fixed = TRUE)
   expect_match(cover_text, 'if cover-image != none', fixed = TRUE)
   expect_match(cover_text, 'dx: cover-title-x', fixed = TRUE)
   expect_match(cover_text, 'fill: cover-title-color', fixed = TRUE)
+  expect_match(cover_text, 'font: font-family', fixed = TRUE)
 
   for (toc_text in list(modern_toc, classic_toc, minimal_toc)) {
     expect_match(toc_text, 'it.element.body', fixed = TRUE)
@@ -91,6 +93,8 @@ test_that("bundled Typst extension uses root-based imports and current outline A
   expect_match(cards_toc, 'cap.body', fixed = TRUE)
   expect_match(cards_toc, 'sec.body', fixed = TRUE)
   expect_match(cards_toc, 'font-family', fixed = TRUE)
+  expect_match(cards_toc, 'context {', fixed = TRUE)
+  expect_match(cards_toc, 'let cards = query(heading.where(level: 1))', fixed = TRUE)
 })
 
 test_that("create_business_report() writes cover_image to config when provided", {
