@@ -1,25 +1,26 @@
-test_that("list_toc_styles() returns a data frame with three rows", {
+test_that("list_toc_styles() returns a data frame with four rows", {
   styles <- list_toc_styles()
   expect_s3_class(styles, "data.frame")
-  expect_equal(nrow(styles), 3L)
+  expect_equal(nrow(styles), 4L)
   expect_true(all(c("id", "name", "description") %in% names(styles)))
 })
 
-test_that("toc style ids are 1, 2, 3", {
+test_that("toc style ids are 1, 2, 3, 4", {
   styles <- list_toc_styles()
-  expect_equal(styles$id, 1L:3L)
+  expect_equal(styles$id, 1L:4L)
 })
 
 test_that(".check_toc_style() returns integer for valid input", {
   expect_equal(BusinessReport:::.check_toc_style(1), 1L)
   expect_equal(BusinessReport:::.check_toc_style(2L), 2L)
   expect_equal(BusinessReport:::.check_toc_style(3), 3L)
+  expect_equal(BusinessReport:::.check_toc_style(4), 4L)
 })
 
 test_that(".check_toc_style() errors on out-of-range value", {
-  expect_error(BusinessReport:::.check_toc_style(0),  regexp = "between 1 and 3")
-  expect_error(BusinessReport:::.check_toc_style(4),  regexp = "between 1 and 3")
-  expect_error(BusinessReport:::.check_toc_style("x"), regexp = "between 1 and 3")
+  expect_error(BusinessReport:::.check_toc_style(0),  regexp = "between 1 and 4")
+  expect_error(BusinessReport:::.check_toc_style(5),  regexp = "between 1 and 4")
+  expect_error(BusinessReport:::.check_toc_style("x"), regexp = "between 1 and 4")
 })
 
 test_that(".check_color() accepts valid hex strings", {

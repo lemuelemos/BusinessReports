@@ -15,6 +15,7 @@ create_business_report(
   primary_color = "#1a3a5c",
   toc_style = 1L,
   cover = TRUE,
+  cover_image = NULL,
   back_cover = TRUE,
   lang = "pt",
   overwrite = FALSE,
@@ -43,6 +44,10 @@ menos que \code{overwrite = TRUE}.}
 \code{3} (Minimalista).}
 
 \item{cover}{Logico. Se \code{TRUE}, inclui capa.}
+
+\item{cover_image}{Caminho da imagem de capa relativa a raiz do projeto,
+por exemplo \code{"assets/minha-capa.png"}. Se \code{NULL} ou \code{""}, usa a capa
+padrao do template.}
 
 \item{back_cover}{Logico. Se \code{TRUE}, inclui contracapa.}
 
@@ -82,6 +87,7 @@ create_business_report(
   primary_color = "#0d3d6e",
   toc_style = 2L,
   cover = TRUE,
+  cover_image = "assets/minha-capa.png",
   back_cover = TRUE
 )
 }

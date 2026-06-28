@@ -6,6 +6,7 @@
 #import "_extensions/business-report/cover.typ": business-cover
 #import "_extensions/business-report/back-cover.typ": business-back-cover
 #import "_extensions/business-report/toc/toc-classic.typ": toc-classic
+#import "_extensions/business-report/toc/toc-cards.typ": toc-cards
 #import "_extensions/business-report/toc/toc-modern.typ": toc-modern
 #import "_extensions/business-report/toc/toc-minimal.typ": toc-minimal
 
@@ -16,6 +17,7 @@
 #let _primary-color = business-config.at("primary-color")
 #let _toc-style     = business-config.at("toc-style")
 #let _show-cover    = business-config.at("cover")
+#let _cover-image   = business-config.at("cover-image")
 #let _show-back     = business-config.at("back-cover")
 #let _lang          = business-config.at("lang")
 
@@ -209,6 +211,7 @@
       authors:      authors,
       date:         date,
       primary-color: _primary-color,
+      cover-image:  _cover-image,
       logo-path:    "../../assets/logo.svg",
     )
     counter(page).update(0)
@@ -222,8 +225,10 @@
     toc-classic(primary-color: _primary-color, font-family: _font-family)
   } else if _toc-style == 2 {
     toc-modern(primary-color: _primary-color, font-family: _font-family)
-  } else {
+  } else if _toc-style == 3 {
     toc-minimal(primary-color: _primary-color, font-family: _font-family)
+  } else {
+    toc-cards(primary-color: _primary-color, font-family: _font-family)
   }
 
   // 3. Main body (arabic page numbering, restart at 1)

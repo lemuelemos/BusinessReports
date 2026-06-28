@@ -59,6 +59,7 @@ test_that("bundled Typst extension uses root-based imports and current outline A
   modern_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-modern.typ"), warn = FALSE), collapse = "\n")
   classic_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-classic.typ"), warn = FALSE), collapse = "\n")
   minimal_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-minimal.typ"), warn = FALSE), collapse = "\n")
+  cards_toc <- paste(readLines(fs::path(ext_dir, "toc", "toc-cards.typ"), warn = FALSE), collapse = "\n")
   cover_text <- paste(readLines(fs::path(ext_dir, "cover.typ"), warn = FALSE), collapse = "\n")
 
   expect_no_match(show_text, '#import', fixed = TRUE)
@@ -67,15 +68,47 @@ test_that("bundled Typst extension uses root-based imports and current outline A
 
   expect_match(template_text, '_extensions/business-report/_business-report-config.typ', fixed = TRUE)
   expect_match(template_text, 'logo-path:    "../../assets/logo.svg"', fixed = TRUE)
+  expect_match(template_text, 'cover-image:  _cover-image', fixed = TRUE)
 
   expect_match(cover_text, 'set text(fill: text-on-dark)', fixed = TRUE)
   expect_no_match(cover_text, 'font: "inherit"', fixed = TRUE)
+  expect_match(cover_text, 'if cover-image != none', fixed = TRUE)
 
   for (toc_text in list(modern_toc, classic_toc, minimal_toc)) {
     expect_match(toc_text, 'it.element.body', fixed = TRUE)
+    expect_match(toc_text, 'font-family', fixed = TRUE)
+  }
+
+  for (toc_text in list(modern_toc, classic_toc, minimal_toc)) {
     expect_match(toc_text, 'it.page()', fixed = TRUE)
     expect_match(toc_text, 'outline(title: none, depth: 3, indent: auto)', fixed = TRUE)
   }
+
+  expect_match(cards_toc, 'counter(page).at(cap.location()).first()', fixed = TRUE)
+  expect_match(cards_toc, 'cap.body', fixed = TRUE)
+  expect_match(cards_toc, 'sec.body', fixed = TRUE)
+  expect_match(cards_toc, 'font-family', fixed = TRUE)
+})
+
+test_that("create_business_report() writes cover_image to config when provided", {
+  skip_if_not_installed("withr")
+  withr::with_tempdir({
+    create_business_report(
+      "cover-image-project",
+      cover_image = "assets/minha-capa.png",
+      open = FALSE
+    )
+
+    config_text <- paste(
+      readLines(
+        fs::path("cover-image-project", "_extensions", "business-report", "_business-report-config.typ"),
+        warn = FALSE
+      ),
+      collapse = "\n"
+    )
+
+    expect_match(config_text, 'cover-image:\\s+"\\.\\./\\.\\./assets/minha-capa\\.png"')
+  })
 })
 
 test_that("create_business_report() errors if path exists and overwrite = FALSE", {

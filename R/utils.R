@@ -54,6 +54,7 @@
 #' @param primary_color  Hex colour string (with leading `#`).
 #' @param toc_style  Integer 1-3.
 #' @param cover  Logical.
+#' @param cover_image  Relative or absolute cover image path for Typst.
 #' @param back_cover  Logical.
 #' @param lang  BCP 47 language tag string.
 #' @noRd
@@ -63,6 +64,7 @@
   primary_color = "#1a3a5c",
   toc_style     = 1L,
   cover         = TRUE,
+  cover_image   = NULL,
   back_cover    = TRUE,
   lang          = "pt"
 ) {
@@ -82,6 +84,7 @@
     glue::glue('  primary-color: rgb("{primary_color}"),'),
     glue::glue("  toc-style:     {as.integer(toc_style)},"),
     glue::glue("  cover:         {bool_str(cover)},"),
+    glue::glue('  cover-image:   {if (is.null(cover_image)) "none" else paste0(\'"\', cover_image, \'"\')},'),
     glue::glue("  back-cover:    {bool_str(back_cover)},"),
     glue::glue('  lang:          "{lang}",'),
     ")"
@@ -136,14 +139,14 @@
 # Input validation helpers
 # -----------------------------------------------------------------------------
 
-#' Check that a toc_style argument is valid (1, 2, or 3)
+#' Check that a toc_style argument is valid (1, 2, 3, or 4)
 #' @noRd
 .check_toc_style <- function(style) {
   style <- suppressWarnings(as.integer(style))
-  if (is.na(style) || !style %in% 1L:3L) {
+  if (is.na(style) || !style %in% 1L:4L) {
     cli::cli_abort(
       c(
-        "{.arg toc_style} must be an integer between 1 and 3.",
+        "{.arg toc_style} must be an integer between 1 and 4.",
         "i" = "Use {.fn BusinessReport::list_toc_styles} to see available styles."
       )
     )
@@ -175,4 +178,29 @@
     )
   }
   registry[registry[["id"]] == font, "typst_family"][[1L]]
+}
+
+#' Normalise an optional cover image path for Typst config
+#' @noRd
+.normalize_cover_image_path <- function(path) {
+  if (is.null(path)) {
+    return(NULL)
+  }
+
+  if (!is.character(path) || length(path) != 1L || is.na(path)) {
+    cli::cli_abort("{.arg cover_image} must be a single character string or NULL.")
+  }
+
+  trimmed <- trimws(path)
+  if (!nzchar(trimmed)) {
+    return(NULL)
+  }
+
+  normalised <- gsub("\\\\", "/", trimmed)
+  if (grepl("^[A-Za-z]:/", normalised) || grepl("^/", normalised)) {
+    return(normalised)
+  }
+
+  relative_path <- fs::path("..", "..", normalised) |> as.character()
+  gsub("\\\\", "/", relative_path)
 }

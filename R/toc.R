@@ -1,8 +1,8 @@
 # R/toc.R
 
 .toc_registry <- data.frame(
-  id = 1L:3L,
-  name = c("Classico", "Moderno", "Minimalista"),
+  id = 1L:4L,
+  name = c("Classico", "Moderno", "Minimalista", "Cards"),
   description = c(
     paste0(
       "Estilo tipografico classico. ",
@@ -21,17 +21,23 @@
       "Sem lideres de pontos nem decoracoes. ",
       "Numero de pagina alinhado a direita. ",
       "Hierarquia transmitida por tamanho de fonte e recuo."
+    ),
+    paste0(
+      "Estilo em cards inspirado em relatorios executivos. ",
+      "Capitulos aparecem em blocos com cabecalho destacado. ",
+      "Subsecoes sao agrupadas dentro de cada card. ",
+      "Mantem a mesma familia tipografica do restante do projeto."
     )
   ),
-  typst_file = c("toc-classic.typ", "toc-modern.typ", "toc-minimal.typ"),
+  typst_file = c("toc-classic.typ", "toc-modern.typ", "toc-minimal.typ", "toc-cards.typ"),
   stringsAsFactors = FALSE
 )
 
-#' Liste os tres estilos de sumario disponiveis em `BusinessReport`
+#' Liste os estilos de sumario disponiveis em `BusinessReport`
 #'
 #' @description
 #' Retorna um data frame descrevendo cada estilo de sumario. Passe o valor de
-#' `id` (1, 2 ou 3) para [create_business_report()] ou [set_toc_style()].
+#' `id` (1, 2, 3 ou 4) para [create_business_report()] ou [set_toc_style()].
 #'
 #' @return Um data frame com as colunas `id`, `name` e `description`.
 #'
@@ -52,8 +58,8 @@ list_toc_styles <- function() {
 #'
 #' @param path Diretorio raiz do projeto. O padrao e o diretorio de trabalho
 #'   atual.
-#' @param style Inteiro: `1` (Classico), `2` (Moderno) ou `3` (Minimalista).
-#'   Use [list_toc_styles()] para ver as descricoes.
+#' @param style Inteiro: `1` (Classico), `2` (Moderno), `3` (Minimalista) ou
+#'   `4` (Cards). Use [list_toc_styles()] para ver as descricoes.
 #'
 #' @return `path`, invisivelmente.
 #'

@@ -10,8 +10,8 @@ set_toc_style(path = ".", style)
 \item{path}{Diretorio raiz do projeto. O padrao e o diretorio de trabalho
 atual.}
 
-\item{style}{Inteiro: \code{1} (Classico), \code{2} (Moderno) ou \code{3} (Minimalista).
-Use \code{\link[=list_toc_styles]{list_toc_styles()}} para ver as descricoes.}
+\item{style}{Inteiro: \code{1} (Classico), \code{2} (Moderno), \code{3} (Minimalista) ou
+\code{4} (Cards). Use \code{\link[=list_toc_styles]{list_toc_styles()}} para ver as descricoes.}
 }
 \value{
 \code{path}, invisivelmente.

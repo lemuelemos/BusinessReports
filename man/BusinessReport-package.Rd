@@ -23,10 +23,5 @@ Useful links:
 \author{
 \strong{Maintainer}: Lemuel Lemos \email{lemuelemos@gmail.com}
 
-Authors:
-\itemize{
-  \item Lemuel Lemos \email{lemuelemos@gmail.com}
-}
-
 }
 \keyword{internal}

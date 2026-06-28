@@ -27,6 +27,9 @@
 #' @param toc_style Estilo do sumario: `1` (Classico), `2` (Moderno) ou
 #'   `3` (Minimalista).
 #' @param cover Logico. Se `TRUE`, inclui capa.
+#' @param cover_image Caminho da imagem de capa relativa a raiz do projeto,
+#'   por exemplo `"assets/minha-capa.png"`. Se `NULL` ou `""`, usa a capa
+#'   padrao do template.
 #' @param back_cover Logico. Se `TRUE`, inclui contracapa.
 #' @param lang Tag BCP 47 de idioma. O padrao e `"pt"`.
 #' @param overwrite Logico. Se `TRUE`, sobrescreve um diretorio existente.
@@ -48,6 +51,7 @@
 #'   primary_color = "#0d3d6e",
 #'   toc_style = 2L,
 #'   cover = TRUE,
+#'   cover_image = "assets/minha-capa.png",
 #'   back_cover = TRUE
 #' )
 #' }
@@ -64,6 +68,7 @@ create_business_report <- function(
   primary_color = "#1a3a5c",
   toc_style     = 1L,
   cover         = TRUE,
+  cover_image   = NULL,
   back_cover    = TRUE,
   lang          = "pt",
   overwrite     = FALSE,
@@ -74,6 +79,7 @@ create_business_report <- function(
   typst_family <- .check_font_id(font)
   .check_color(primary_color)
   toc_style <- .check_toc_style(toc_style)
+  cover_image <- .normalize_cover_image_path(cover_image)
 
   if (is.null(date)) {
     date <- .format_date(Sys.Date(), lang)
@@ -111,6 +117,7 @@ create_business_report <- function(
     primary_color = primary_color,
     toc_style     = toc_style,
     cover         = cover,
+    cover_image   = cover_image,
     back_cover    = back_cover,
     lang          = lang
   )
