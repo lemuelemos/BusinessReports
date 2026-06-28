@@ -47,7 +47,12 @@ test_that("create_business_report() scaffolds a project with expected structure"
 })
 
 test_that("bundled Typst extension uses root-based imports and current outline API", {
-  ext_dir <- testthat::test_path("..", "..", "inst", "quarto", "_extensions", "business-report")
+  ext_dir <- system.file(
+    "quarto", "_extensions", "business-report",
+    package = "BusinessReport"
+  )
+
+  expect_true(nzchar(ext_dir))
 
   show_text <- paste(readLines(fs::path(ext_dir, "typst-show.typ"), warn = FALSE), collapse = "\n")
   template_text <- paste(readLines(fs::path(ext_dir, "typst-template.typ"), warn = FALSE), collapse = "\n")
