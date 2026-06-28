@@ -55,6 +55,9 @@
 #' @param toc_style  Integer 1-3.
 #' @param cover  Logical.
 #' @param cover_image  Relative or absolute cover image path for Typst.
+#' @param cover_title_color  Cover title color as hex string.
+#' @param cover_title_x  Horizontal offset for the cover title in Typst units.
+#' @param cover_title_y  Vertical offset for the cover title in Typst units.
 #' @param back_cover  Logical.
 #' @param lang  BCP 47 language tag string.
 #' @noRd
@@ -65,6 +68,9 @@
   toc_style     = 1L,
   cover         = TRUE,
   cover_image   = NULL,
+  cover_title_color = "#FFFFFF",
+  cover_title_x = "18mm",
+  cover_title_y = "110mm",
   back_cover    = TRUE,
   lang          = "pt"
 ) {
@@ -85,6 +91,9 @@
     glue::glue("  toc-style:     {as.integer(toc_style)},"),
     glue::glue("  cover:         {bool_str(cover)},"),
     glue::glue('  cover-image:   {if (is.null(cover_image)) "none" else paste0(\'"\', cover_image, \'"\')},'),
+    glue::glue('  cover-title-color: rgb("{cover_title_color}"),'),
+    glue::glue("  cover-title-x: {cover_title_x},"),
+    glue::glue("  cover-title-y: {cover_title_y},"),
     glue::glue("  back-cover:    {bool_str(back_cover)},"),
     glue::glue('  lang:          "{lang}",'),
     ")"
@@ -203,4 +212,24 @@
 
   relative_path <- fs::path("..", "..", normalised) |> as.character()
   gsub("\\\\", "/", relative_path)
+}
+
+#' Normalise a Typst length token
+#' @noRd
+.normalize_typst_length <- function(value, arg_name) {
+  if (!is.character(value) || length(value) != 1L || is.na(value)) {
+    cli::cli_abort("{.arg {arg_name}} must be a single character string.")
+  }
+
+  trimmed <- trimws(value)
+  pattern <- "^-?[0-9]+(\\.[0-9]+)?(pt|mm|cm|in|em|rem)$"
+  if (!grepl(pattern, trimmed)) {
+    cli::cli_abort(
+      c(
+        "{.arg {arg_name}} must be a Typst length like {.val 18mm} or {.val 24pt}."
+      )
+    )
+  }
+
+  trimmed
 }

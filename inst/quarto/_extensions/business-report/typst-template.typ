@@ -18,6 +18,9 @@
 #let _toc-style     = business-config.at("toc-style")
 #let _show-cover    = business-config.at("cover")
 #let _cover-image   = business-config.at("cover-image")
+#let _cover-title-color = business-config.at("cover-title-color")
+#let _cover-title-x = business-config.at("cover-title-x")
+#let _cover-title-y = business-config.at("cover-title-y")
 #let _show-back     = business-config.at("back-cover")
 #let _lang          = business-config.at("lang")
 
@@ -212,6 +215,9 @@
       date:         date,
       primary-color: _primary-color,
       cover-image:  _cover-image,
+      cover-title-color: _cover-title-color,
+      cover-title-x: _cover-title-x,
+      cover-title-y: _cover-title-y,
       logo-path:    "../../assets/logo.svg",
     )
     counter(page).update(0)

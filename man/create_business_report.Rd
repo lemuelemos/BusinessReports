@@ -16,6 +16,9 @@ create_business_report(
   toc_style = 1L,
   cover = TRUE,
   cover_image = NULL,
+  cover_title_color = "#FFFFFF",
+  cover_title_x = "18mm",
+  cover_title_y = "110mm",
   back_cover = TRUE,
   lang = "pt",
   overwrite = FALSE,
@@ -48,6 +51,15 @@ menos que \code{overwrite = TRUE}.}
 \item{cover_image}{Caminho da imagem de capa relativa a raiz do projeto,
 por exemplo \code{"assets/minha-capa.png"}. Se \code{NULL} ou \code{""}, usa a capa
 padrao do template.}
+
+\item{cover_title_color}{Cor hexadecimal do titulo sobre a imagem de capa.
+O padrao e \code{"#FFFFFF"}.}
+
+\item{cover_title_x}{Posicao horizontal do titulo sobre a imagem de capa,
+em unidade Typst, por exemplo \code{"18mm"}.}
+
+\item{cover_title_y}{Posicao vertical do titulo sobre a imagem de capa,
+em unidade Typst, por exemplo \code{"110mm"}.}
 
 \item{back_cover}{Logico. Se \code{TRUE}, inclui contracapa.}
 
@@ -88,6 +100,9 @@ create_business_report(
   toc_style = 2L,
   cover = TRUE,
   cover_image = "assets/minha-capa.png",
+  cover_title_color = "#FFFFFF",
+  cover_title_x = "18mm",
+  cover_title_y = "110mm",
   back_cover = TRUE
 )
 }

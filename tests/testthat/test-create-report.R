@@ -69,10 +69,13 @@ test_that("bundled Typst extension uses root-based imports and current outline A
   expect_match(template_text, '_extensions/business-report/_business-report-config.typ', fixed = TRUE)
   expect_match(template_text, 'logo-path:    "../../assets/logo.svg"', fixed = TRUE)
   expect_match(template_text, 'cover-image:  _cover-image', fixed = TRUE)
+  expect_match(template_text, 'cover-title-color: _cover-title-color', fixed = TRUE)
 
   expect_match(cover_text, 'set text(fill: text-on-dark)', fixed = TRUE)
   expect_no_match(cover_text, 'font: "inherit"', fixed = TRUE)
   expect_match(cover_text, 'if cover-image != none', fixed = TRUE)
+  expect_match(cover_text, 'dx: cover-title-x', fixed = TRUE)
+  expect_match(cover_text, 'fill: cover-title-color', fixed = TRUE)
 
   for (toc_text in list(modern_toc, classic_toc, minimal_toc)) {
     expect_match(toc_text, 'it.element.body', fixed = TRUE)
@@ -96,6 +99,9 @@ test_that("create_business_report() writes cover_image to config when provided",
     create_business_report(
       "cover-image-project",
       cover_image = "assets/minha-capa.png",
+      cover_title_color = "#FFFFFF",
+      cover_title_x = "18mm",
+      cover_title_y = "110mm",
       open = FALSE
     )
 
@@ -108,6 +114,9 @@ test_that("create_business_report() writes cover_image to config when provided",
     )
 
     expect_match(config_text, 'cover-image:\\s+"\\.\\./\\.\\./assets/minha-capa\\.png"')
+    expect_match(config_text, 'cover-title-color:\\s+rgb\\("#FFFFFF"\\)')
+    expect_match(config_text, 'cover-title-x:\\s+18mm')
+    expect_match(config_text, 'cover-title-y:\\s+110mm')
   })
 })
 

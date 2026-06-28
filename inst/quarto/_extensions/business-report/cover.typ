@@ -8,6 +8,9 @@
   date:          "",
   primary-color: rgb("#1a3a5c"),
   cover-image:   none,
+  cover-title-color: white,
+  cover-title-x: 18mm,
+  cover-title-y: 110mm,
   logo-path:     none,
 ) = {
   if cover-image != none {
@@ -19,7 +22,16 @@
       footer:    none,
     )
 
-    image(cover-image, width: 210mm, height: 297mm, fit: "cover")
+    place(top + left, image(cover-image, width: 210mm, height: 297mm, fit: "cover"))
+    place(
+      top + left,
+      dx: cover-title-x,
+      dy: cover-title-y,
+      box(
+        width: 140mm,
+        text(size: 30pt, weight: "bold", tracking: -0.3pt, fill: cover-title-color)[#title]
+      )
+    )
   } else {
     let header-bg    = primary-color
     let accent-bar   = primary-color.lighten(50%)
